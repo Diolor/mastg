@@ -1,5 +1,5 @@
 ---
-title: Glossary
+title: Glossary (Beta)
 ---
 
-TODO text + list
+This Glossary is an aggregation of terms and definitions. It's currently in beta.
