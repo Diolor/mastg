@@ -1,0 +1,14 @@
+                  
+                  
+┌────────────────┐
+│ 1 Code Finding │
+└────────────────┘
+                                
+    AndroidManifest_reversed.xml
+    ❯❱ rules.mastg-android-manifest-cleartext
+          [MASVS-PLATFORM-2] android:usesCleartextTraffic="true" is set in AndroidManifest.xml. Cleartext 
+          traffic increases risk when combined with exposed WebView bridges and enabled JavaScript. Prefer
+          TLS-only communication and set this to false.                                                   
+                                                                                                          
+           34┆ android:usesCleartextTraffic="true"
+

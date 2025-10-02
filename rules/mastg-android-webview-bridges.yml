@@ -1,0 +1,11 @@
+rules:
+  - id: mastg-android-webview-bridges
+    severity: WARNING
+    languages:
+      - java
+    metadata:
+      summary: This rule detects WebView javascript - native bridges.
+    message: "[MASVS-PLATFORM-2] Detected javascript bridge in WebView."
+    pattern-either:
+        - pattern: $WEBVIEW.setJavaScriptEnabled(true)
+        - pattern: $WEBVIEW.addJavascriptInterface($INTERFACE, $NAME)

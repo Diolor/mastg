@@ -1,0 +1,11 @@
+rules:
+  - id: mastg-android-manifest-cleartext
+    severity: WARNING
+    languages:
+      - xml
+    pattern: android:usesCleartextTraffic="true"
+    metadata:
+      summary: This rule flags android:usesCleartextTraffic="true" in the manifest.
+    message: |
+      [MASVS-PLATFORM-2] android:usesCleartextTraffic="true" is set in AndroidManifest.xml. Cleartext traffic increases risk when combined
+      with exposed WebView bridges and enabled JavaScript. Prefer TLS-only communication and set this to false.

@@ -12,11 +12,21 @@ test: MASTG-TEST-02te
 
 ### Steps
 
-// TODO
+Let's run our @MASTG-TOOL-0110 rule against the sample manifest file.
+
+{{ ../../../../rules/mastg-android-manifest-cleartext.yml }}
+
+And another one against the reversed Java code.
+
+{{ ../../../../rules/mastg-android-webview-bridges.yml }}
+
+{{ run.sh }}
 
 ### Observation
 
 // TODO
+
+{{ output.txt, output2.txt }}
 
 ### Evaluation
 
