@@ -8,7 +8,7 @@
     ❯❱ rules.mastg-android-webview-bridges
           [MASVS-PLATFORM-2] Detected javascript bridge in WebView.
                                                                    
-           45┆ webView.getSettings().setJavaScriptEnabled(true);
+           46┆ webView.getSettings().setJavaScriptEnabled(true);
             ⋮┆----------------------------------------
-           46┆ webView.addJavascriptInterface(new Bridge(), "MASBridge");
+           47┆ webView.addJavascriptInterface(new Bridge(), "MASBridge");
 

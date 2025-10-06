@@ -10,5 +10,5 @@
           traffic increases risk when combined with exposed WebView bridges and enabled JavaScript. Prefer
           TLS-only communication and set this to false.                                                   
                                                                                                           
-           34┆ android:usesCleartextTraffic="true"
+           28┆ android:usesCleartextTraffic="true"
 
