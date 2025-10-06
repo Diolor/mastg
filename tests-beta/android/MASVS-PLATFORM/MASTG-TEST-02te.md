@@ -4,7 +4,7 @@ title: Native code Exposed Through WebViews
 id: MASTG-TEST-02te
 type: [static, dynamic]
 weakness: MASWE-0069
-#best-practices: [MASTG-BEST-0011, MASTG-BEST-0012, MASTG-BEST-0013] // TODO
+best-practices: [MASTG-BEST-0011, MASTG-BEST-0012, MASTG-BEST-0013]
 profiles: [L1, L2]
 ---
 
@@ -17,8 +17,11 @@ The weakness could become a vulnerability if the WebView allows unencrypted (non
 > Note:
 > Applications targeting API level 16 or earlier are particularly at risk of attack because this method can be used to allow JavaScript to control the host application.
 
-
 **Example Attack Scenario:**
+
+1. An attacker exploits an XSS vulnerability in a website loaded in the WebView.
+2. The attacker uses the XSS vulnerability to execute JavaScript code that calls methods exposed by the `addJavascriptInterface` method.
+3. The attacker can then read (sensitive) data or perform actions on behalf of the user, depending on the methods exposed by the interface.
 
 ## Steps
 
@@ -42,16 +45,21 @@ The output should contain:
 
 **Fail:**
 
-The test fails if all the following are true:
+The test fails automatically if all the following are true:
 
-- `usesCleartextTraffic` is `true` or it's not set at all in the `AndroidManifest.xml` file, and the app targets API level 27 or lower.
+- the application is targeting API level 16 or lower.
+- `addJavascriptInterface` is used at least once.
+
+The test also fails automatically if all the following are true:
+
+- `usesCleartextTraffic` is not set in the `AndroidManifest.xml` file and the app targets API level 27 or lower, or `usesCleartextTraffic` is `true` and the app targets API level 28 or above.
 - `setJavaScriptEnabled` is `true`.
 - `addJavascriptInterface` is used at least once.
 
-You should use the list of locations where `addJavascriptInterface` and `@JavascriptInterface` are used to determine whether an attacker could:
+The test also fails, after evaluating the `addJavascriptInterface` method(s) and `@JavascriptInterface` annotation(s), if all the following are true:
 
-- Read sensitive data from the interface methods.
-- Perform actions via the interface methods.
+- Sensitive data can be read through the interface methods.
+- Actions that can affect the confidentiality, integrity, or availability of the application can be performed via the interface methods.
 
 **Pass:**
 
