@@ -26,7 +26,7 @@ And another one against the reversed Java code.
 
 // TODO
 
-{{ output.txt, output2.txt }}
+{{ output.txt # output2.txt }}
 
 ### Evaluation
 
