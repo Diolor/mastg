@@ -4,44 +4,61 @@ import android.content.Context
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.webkit.JavascriptInterface
-import android.widget.Toast
 
 class MastgTestWebView (private val context: Context){
 
     // Insecure demo JS bridge for testing (do NOT use in production)
     inner class Bridge {
+
+        //Affects i.e. confidentiality
         @JavascriptInterface
-        fun echo(msg: String): String {
-            return "echo:$msg"
+        fun getName(): String {
+            return "John Doe"
         }
 
+        //Affects i.e. confidentiality and/or integrity
         @JavascriptInterface
-        fun showToast(msg: String) {
-            Toast.makeText(context, "JS says: $msg", Toast.LENGTH_SHORT).show()
+        fun getJwt(): String {
+            return "header.payload.signature" // Dummy JWT for demo purposes
+        }
+
+        //Affects i.e. integrity
+        @JavascriptInterface
+        fun changeConfiguration(config: String) {
+            // write to app configuration or disk
         }
     }
 
     fun mastgTest(webView: WebView) {
-        // Intentionally insecure WebView demo matching 00te/02te guidance
+        // Intentionally insecure WebView demo
         val demoHtml = """
-            <!doctype html>
             <html>
-              <head>
-                <meta charset='utf-8'>
-                <title>MAS WebView Demo</title>
-              </head>
-              <body>
-                <h3>MAS WebView JS Bridge Demo (insecure)</h3>
-                <button onclick="MASBridge.showToast('Hello from JS!')">Call Android Toast</button>
-                <button onclick="(async () => {
-                  try {
-                    const res = MASBridge.echo('ping');
-                    document.getElementById('out').textContent = res;
-                  } catch (e) { document.getElementById('out').textContent = 'error:' + e; }
-                })()">Echo</button>
-                <p id='out'></p>
-              </body>
+            <body>
+                <h1>Insecure WebView Demo</h1>
+                <button onclick="showName()">Get Name</button>
+                <button onclick="showJwt()">Get JWT</button>
+                <button onclick="changeConfig()">Change Config</button>
+                <p id="output"></p>
+                
+                <script>
+                    function showName() {
+                        var name = MASBridge.getName();
+                        document.getElementById("output").innerText = "Name: " + name;
+                    }
+                    
+                    function showJwt() {
+                        var jwt = MASBridge.getJwt();
+                        document.getElementById("output").innerText = "JWT: " + jwt;
+                    }
+                    
+                    function changeConfig() {
+                        MASBridge.changeConfiguration("newConfigValue");
+                        document.getElementById("output").innerText = "Configuration Changed";
+                    }
+                </script>
+            </body>
             </html>
+            
         """.trimIndent()
 
         webView.apply {

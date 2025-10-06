@@ -4,8 +4,6 @@ import android.content.Context;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
-import androidx.core.app.NotificationCompat;
 import kotlin.Metadata;
 import kotlin.jvm.internal.Intrinsics;
 
@@ -22,21 +20,24 @@ public final class MastgTestWebView {
     }
 
     /* compiled from: MastgTestWebView.kt */
-    @Metadata(d1 = {"\u0000\u001a\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0002\b\u0003\n\u0002\u0010\u000e\n\u0002\b\u0002\n\u0002\u0010\u0002\n\u0000\b\u0086\u0004\u0018\u00002\u00020\u0001B\u0007¢\u0006\u0004\b\u0002\u0010\u0003J\u0010\u0010\u0004\u001a\u00020\u00052\u0006\u0010\u0006\u001a\u00020\u0005H\u0007J\u0010\u0010\u0007\u001a\u00020\b2\u0006\u0010\u0006\u001a\u00020\u0005H\u0007¨\u0006\t"}, d2 = {"Lorg/owasp/mastestapp/MastgTestWebView$Bridge;", "", "<init>", "(Lorg/owasp/mastestapp/MastgTestWebView;)V", "echo", "", NotificationCompat.CATEGORY_MESSAGE, "showToast", "", "app_debug"}, k = 1, mv = {2, 0, 0}, xi = 48)
+    @Metadata(d1 = {"\u0000\u001c\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0002\b\u0003\n\u0002\u0010\u000e\n\u0002\b\u0002\n\u0002\u0010\u0002\n\u0002\b\u0002\b\u0086\u0004\u0018\u00002\u00020\u0001B\u0007¢\u0006\u0004\b\u0002\u0010\u0003J\b\u0010\u0004\u001a\u00020\u0005H\u0007J\b\u0010\u0006\u001a\u00020\u0005H\u0007J\u0010\u0010\u0007\u001a\u00020\b2\u0006\u0010\t\u001a\u00020\u0005H\u0007¨\u0006\n"}, d2 = {"Lorg/owasp/mastestapp/MastgTestWebView$Bridge;", "", "<init>", "(Lorg/owasp/mastestapp/MastgTestWebView;)V", "getName", "", "getJwt", "changeConfiguration", "", "config", "app_debug"}, k = 1, mv = {2, 0, 0}, xi = 48)
     public final class Bridge {
         public Bridge() {
         }
 
         @JavascriptInterface
-        public final String echo(String msg) {
-            Intrinsics.checkNotNullParameter(msg, "msg");
-            return "echo:" + msg;
+        public final String getName() {
+            return "John Doe";
         }
 
         @JavascriptInterface
-        public final void showToast(String msg) {
-            Intrinsics.checkNotNullParameter(msg, "msg");
-            Toast.makeText(MastgTestWebView.this.context, "JS says: " + msg, 0).show();
+        public final String getJwt() {
+            return "header.payload.signature";
+        }
+
+        @JavascriptInterface
+        public final void changeConfiguration(String config) {
+            Intrinsics.checkNotNullParameter(config, "config");
         }
     }
 
@@ -46,6 +47,6 @@ public final class MastgTestWebView {
         webView.addJavascriptInterface(new Bridge(), "MASBridge");
         webView.setWebViewClient(new WebViewClient() { // from class: org.owasp.mastestapp.MastgTestWebView$mastgTest$1$1
         });
-        webView.loadDataWithBaseURL("http://insecure.example/", "<!doctype html>\n<html>\n  <head>\n    <meta charset='utf-8'>\n    <title>MAS WebView Demo</title>\n  </head>\n  <body>\n    <h3>MAS WebView JS Bridge Demo (insecure)</h3>\n    <button onclick=\"MASBridge.showToast('Hello from JS!')\">Call Android Toast</button>\n    <button onclick=\"(async () => {\n      try {\n        const res = MASBridge.echo('ping');\n        document.getElementById('out').textContent = res;\n      } catch (e) { document.getElementById('out').textContent = 'error:' + e; }\n    })()\">Echo</button>\n    <p id='out'></p>\n  </body>\n</html>", "text/html", "utf-8", null);
+        webView.loadDataWithBaseURL("http://insecure.example/", "<html>\n<body>\n    <h1>Insecure WebView Demo</h1>\n    <button onclick=\"showName()\">Get Name</button>\n    <button onclick=\"showJwt()\">Get JWT</button>\n    <button onclick=\"changeConfig()\">Change Config</button>\n    <p id=\"output\"></p>\n    \n    <script>\n        function showName() {\n            var name = MASBridge.getName();\n            document.getElementById(\"output\").innerText = \"Name: \" + name;\n        }\n        \n        function showJwt() {\n            var jwt = MASBridge.getJwt();\n            document.getElementById(\"output\").innerText = \"JWT: \" + jwt;\n        }\n        \n        function changeConfig() {\n            MASBridge.changeConfiguration(\"newConfigValue\");\n            document.getElementById(\"output\").innerText = \"Configuration Changed\";\n        }\n    </script>\n</body>\n</html>\n", "text/html", "utf-8", null);
     }
 }
