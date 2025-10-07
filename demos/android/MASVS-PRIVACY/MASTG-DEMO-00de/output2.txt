@@ -1,13 +1,28 @@
                    
                    
 ┌─────────────────┐
-│ 2 Code Findings │
+│ 5 Code Findings │
 └─────────────────┘
                                   
     MastgTestWebView_reversed.java
     ❯❱ rules.mastg-android-webview-bridges
           [MASVS-PLATFORM-2] Detected javascript bridge in WebView.
                                                                    
+           28┆ @JavascriptInterface
+           29┆ public final String getName() {
+           30┆     return "John Doe";
+           31┆ }
+            ⋮┆----------------------------------------
+           33┆ @JavascriptInterface
+           34┆ public final String getJwt() {
+           35┆     return "header.payload.signature";
+           36┆ }
+            ⋮┆----------------------------------------
+           38┆ @JavascriptInterface
+           39┆ public final void changeConfiguration(String config) {
+           40┆     Intrinsics.checkNotNullParameter(config, "config");
+           41┆ }
+            ⋮┆----------------------------------------
            46┆ webView.getSettings().setJavaScriptEnabled(true);
             ⋮┆----------------------------------------
            47┆ webView.addJavascriptInterface(new Bridge(), "MASBridge");

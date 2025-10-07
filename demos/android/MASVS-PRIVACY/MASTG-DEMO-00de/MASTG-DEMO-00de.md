@@ -26,10 +26,10 @@ And another one against the reversed Java code.
 
 ### Observation
 
-The rule detected a location where `android:usesCleartextTraffic` is set to `true` in the `AndroidManifest.xml` file and a location where `setJavaScriptEnabled` is set to `true` and a `WebView` component exposes a native interface through the `addJavascriptInterface()` method.
+The rule detected a location where `android:usesCleartextTraffic` is set to `true` in the `AndroidManifest.xml`. It also detected three methods annotated with  `@JavascriptInterface`, a location where `setJavaScriptEnabled` is set to `true`, and the location where the `WebView` component attaches a native interface through the `addJavascriptInterface()` method.
 
 {{ output.txt # output2.txt }}
 
 ### Evaluation
 
-After reviewing the decompiled code at the location specified in the output (file and line number), we can conclude that the test fails because the WebView Bridge allows reading of sensitive data, specifically a first and a last name (PII), a JWT and setting a new configuration to the app.
+After reviewing the decompiled code at the location specified in the output (file and line number), we can conclude that the test fails because JavaScript is enabled in this webview, a WebView Bridge is attached, and this Bridge allows reading of sensitive data, specifically a first and a last name (PII) and a JWT via the `@JavascriptInterface` annotated methods.
