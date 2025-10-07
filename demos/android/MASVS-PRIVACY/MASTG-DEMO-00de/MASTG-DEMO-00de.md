@@ -26,7 +26,7 @@ And another one against the reversed Java code.
 
 ### Observation
 
-The rule detected a location where `android:usesCleartextTraffic` is set to `true` in the `AndroidManifest.xml`. It also detected three methods annotated with  `@JavascriptInterface`, a location where `setJavaScriptEnabled` is set to `true`, and the location where the `WebView` component attaches a native interface through the `addJavascriptInterface()` method.
+The rule detected a location where `android:usesCleartextTraffic` is set to `true` in the `AndroidManifest.xml`. It also detected three methods annotated with `@JavascriptInterface`, a location where `setJavaScriptEnabled` is set to `true`, and the location where the `WebView` component attaches a native interface through the `addJavascriptInterface()` method.
 
 {{ output.txt # output2.txt }}
 

@@ -11,9 +11,9 @@ WebViews in Android allow applications to render web content, but they can intro
 
 Whenever possible, follow the guidance in @MASTG-BEST-0012 and load only static WebViews that are packaged within the app bundle. This approach ensures that the displayed content cannot be tampered with remotely.
 
-If your application must display dynamic web content from the internet, ensure that all websites loaded in your WebView are secure and under your organization’s control.
+If your application must display dynamic web content from the internet, ensure that all websites loaded in your WebView are secure and under your organization's control.
 
-When you need to display content from external or untrusted domains, you should not load it directly in a WebView. Instead, open it in the user’s default browser or use safer alternatives such as [Trusted Web Activities](https://developer.android.com/guide/topics/app-bundle/trusted-web-activities) or [Custom Tabs](https://developer.chrome.com/docs/android/custom-tabs/overview/). These solutions leverage the browser’s isolated environment, benefiting from:
+When you need to display content from external or untrusted domains, you should not load it directly in a WebView. Instead, open it in the user’s default browser or use safer alternatives such as [Trusted Web Activities](https://developer.android.com/guide/topics/app-bundle/trusted-web-activities) or [Custom Tabs](https://developer.chrome.com/docs/android/custom-tabs/overview/). These solutions leverage the browser's isolated environment, benefiting from:
 •	Automatic security updates
 •	Strong process sandboxing
 •	Built-in mitigations against common web vulnerabilities (e.g., Cross-Site Scripting (XSS), Man-in-the-Middle (MITM) attacks)
