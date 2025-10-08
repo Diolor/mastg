@@ -1,12 +1,26 @@
 rules:
   - id: mastg-android-webview-bridges
     severity: WARNING
-    languages:
-      - java
-    metadata:
-      summary: This rule detects WebView javascript - native bridges.
-    message: "[MASVS-PLATFORM-2] Detected javascript bridge in WebView."
-    pattern-either:
-      - pattern: $WEBVIEW.setJavaScriptEnabled(true)
-      - pattern: $WEBVIEW.addJavascriptInterface($BRIDGE, $NAME)
-      - pattern: "@JavascriptInterface $RETURN_TYPE $FUNCTION (...){...}"
+    message: '[MASVS-PLATFORM-2] Android WebView bridge is defined and passed to addJavascriptInterface(...)'
+    mode: join
+    join:
+      rules:
+        # 1) Capture any setJavaScriptEnabled(true) call
+        - id: js-enabled
+          languages: [java]
+          pattern: $WEBVIEW.getSettings().setJavaScriptEnabled(true)
+
+        # 2) Capture any addJavascriptInterface(new $BRIDGE(...), ...)
+        - id: js-interface
+          languages: [java]
+          pattern: $WEBVIEW.addJavascriptInterface(new $BRIDGE(...), $_)
+        # 3) Capture any class definition: class $BRIDGE { ... }
+        - id: class-def
+          languages: [java]
+          pattern: class $BRIDGE { ... }
+
+      # 3) Only report when the class name matches in both findings
+      on:
+        - 'js-enabled.$WEBVIEW == js-interface.$WEBVIEW'
+        - 'js-interface.$BRIDGE == class-def.$BRIDGE'
+
