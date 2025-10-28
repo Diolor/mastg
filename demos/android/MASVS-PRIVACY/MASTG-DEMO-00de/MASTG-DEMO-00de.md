@@ -14,11 +14,7 @@ The following demo demonstrates a `WebView` component that exposes native functi
 
 ### Steps
 
-Let's run our @MASTG-TOOL-0110 rule against the sample manifest file.
-
-{{ ../../../../rules/mastg-android-manifest-cleartext.yml }}
-
-And another one against the reversed Java code.
+Let's run our @MASTG-TOOL-0110 rule against the reversed Java code.
 
 {{ ../../../../rules/mastg-android-webview-bridges.yml }}
 
@@ -26,7 +22,7 @@ And another one against the reversed Java code.
 
 ### Observation
 
-The rule detected a location where `android:usesCleartextTraffic` is set to `true` in the `AndroidManifest.xml`. It also detected the Javascript/Native Bridge class (with three methods annotated with `@JavascriptInterface`). The `WebView` had `setJavaScriptEnabled` set to `true`, and the Bridge was passed through the `addJavascriptInterface()` method in that WebView.
+The rule detected the location of a JavaScript/Native Bridge class (with three methods annotated with `@JavascriptInterface`). The `WebView` had `setJavaScriptEnabled` set to `true`, and the Bridge was passed through the `addJavascriptInterface()` method in that WebView.
 
 {{ output.txt # output2.txt }}
 
