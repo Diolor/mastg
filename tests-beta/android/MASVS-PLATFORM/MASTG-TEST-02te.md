@@ -15,7 +15,7 @@ This test verifies that the application cleans up sensitive information used by 
 
 Android WebViews cache data when the server responds with specific `Cache-Control` headers that instruct the browser to cache the content. This cache is saved in the device's disk and/or RAM. If the WebView is handling sensitive information, it is crucial to clear the cache when the WebView is no longer needed to delete any locally stored files.
 
-On server-side responses, the `Cache-Control: no-cache` can be used to indicate that an application should not cache particular content. If this header is not set or cannot be set, then the cache should be cleared. 
+On server-side responses, the `Cache-Control: no-cache` can be used to indicate that an application should not cache particular content. If this header is not set or cannot be set, then the cache should be cleared.
 
 ### Sensitive information storage areas
 
@@ -41,7 +41,7 @@ Clearing methods can be generic or granular and vary depending on the storage ar
 
 ## Steps
 
-1. Install and run the app. 
+1. Install and run the app.
 2. Navigate to the webview of the mobile app you want to ensure is appropriately cleaned up.
 3. Optionally, manually debug the webview by @MASTG-TECH-0141 to inspect the storage areas for their content.
 4. Execute a method trace (@MASTG-TECH-0033) (using e.g. @MASTG-TOOL-0001) by attaching to the running app, targeting webview cleanup APIs, and save the output.
