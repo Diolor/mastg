@@ -10,7 +10,7 @@ profiles: [L1, L2]
 
 ## Overview
 
-Android apps that have WebViews may also have WebView – Native bridges. These bridges can be added via the `addJavascriptInterface` method in the `WebView` class. They enable two-way communication: native code can pass data to the WebView, and JavaScript in the WebView can call into native code. Any website loaded inside the WebView, including those outside the organization's control, can access these bridges (if configured) whenever JavaScript is enabled with `setJavaScriptEnabled(true)`.
+Android apps that use WebViews may also include WebView–Native bridges. These bridges can be added via the `addJavascriptInterface` method in the `WebView` class. They enable two-way communication: native code can pass data to the WebView, and JavaScript in the WebView can call into native code. Any website loaded inside the WebView, including those outside the organization's control, can access these bridges (if configured) whenever JavaScript is enabled with `setJavaScriptEnabled(true)`.
 
 The weakness could become a vulnerability if the WebView allows unencrypted (non-TLS) traffic (i.e., HTTPS) in combination with an XSS attack. Please refer to @MASTG-TEST-0235 to evaluate cleartext traffic.
 
@@ -27,17 +27,17 @@ The weakness could become a vulnerability if the WebView allows unencrypted (non
 
 1. Use a tool like @MASTG-TOOL-0110 to search for references to:
 
-    - the `setJavaScriptEnabled` method
-    - the `addJavascriptInterface` method
-    - the `@JavascriptInterface` annotation
+- the `setJavaScriptEnabled` method
+- the `addJavascriptInterface` method
+- the `@JavascriptInterface` annotation
 
 ## Observation
 
 The output should contain a list of WebView instances, including the following methods and their arguments:
 
-    - `setJavaScriptEnabled`
-    - `addJavascriptInterface` and their associated classes
-    - `@JavascriptInterface` and their associated methods
+- `setJavaScriptEnabled`
+- `addJavascriptInterface` and their associated classes
+- `@JavascriptInterface` and their associated methods
 
 ## Evaluation
 
@@ -45,7 +45,7 @@ The output should contain a list of WebView instances, including the following m
 
 The test fails automatically if all the following are true:
 
-- the application is targeting API level 16 or lower.
+- The application is targeting API level 16 or lower.
 - `addJavascriptInterface` is used at least once.
 
 The test also fails automatically if all the following are true:
