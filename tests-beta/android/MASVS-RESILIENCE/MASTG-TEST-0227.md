@@ -16,7 +16,7 @@ Note that this flag works independently of the `debuggable` attribute in the `An
 
 ## Steps
 
-1. Run @MASTG-TECH-0014 with a tool such as @MASTG-TOOL-0110 on the app binary and look for uses of:
+1. Run @MASTG-TECH-0014 with a tool such as @MASTG-TOOL-0110 on the app code and look for uses of:
     - `WebView.setWebContentsDebuggingEnabled` being set to `true`.
     - `ApplicationInfo.FLAG_DEBUGGABLE`.
 

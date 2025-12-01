@@ -32,7 +32,7 @@ Note: the **Security** framework only supports asymmetric algorithms and is ther
 
 ## Steps
 
-1. Run a static analysis tool such as @MASTG-TOOL-0073 on the app binary, or use a dynamic analysis tool like @MASTG-TOOL-0039, and look for uses of the cryptographic functions that perform hashing operations.
+1. Run a @MASTG-TECH-0066 scan such as @MASTG-TOOL-0073 on the app binary, or use a dynamic analysis tool like @MASTG-TOOL-0039, and look for uses of the cryptographic functions that perform hashing operations.
 
 ## Observation
 

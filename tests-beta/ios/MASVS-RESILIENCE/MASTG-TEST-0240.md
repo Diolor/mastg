@@ -16,7 +16,7 @@ The limitations of static analysis should be considered. It is possible that the
 
 ## Steps
 
-1. Run a static analysis tool such as @MASTG-TOOL-0073 on the app binary looking for common jailbreak detection checks.
+1. Run a @MASTG-TECH-0066 scan such as @MASTG-TOOL-0073 on the app binary looking for common jailbreak detection checks.
 
 ## Observation
 

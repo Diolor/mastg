@@ -16,8 +16,8 @@ Apps can clear the contents of the general pasteboard by setting `UIPasteboard.g
 
 ## Steps
 
-1. Run a static analysis scan using @MASTG-TOOL-0073 to detect usage of the [`UIPasteboard.general`](https://developer.apple.com/documentation/uikit/uipasteboard/1622106-generalpasteboard "UIPasteboard generalPasteboard") property.
-2. Run a static analysis scan using @MASTG-TOOL-0073 to detect usage of the [`UIPasteboard.setItems`](https://developer.apple.com/documentation/uikit/uipasteboard/setitems(_:options:) "UIPasteboard setItems") method.
+1. Run a @MASTG-TECH-0066 scan using @MASTG-TOOL-0073 to detect usage of the [`UIPasteboard.general`](https://developer.apple.com/documentation/uikit/uipasteboard/1622106-generalpasteboard "UIPasteboard generalPasteboard") property.
+2. Run a @MASTG-TECH-0066 scan using @MASTG-TOOL-0073 to detect usage of the [`UIPasteboard.setItems`](https://developer.apple.com/documentation/uikit/uipasteboard/setitems(_:options:) "UIPasteboard setItems") method.
 
 ## Observation
 

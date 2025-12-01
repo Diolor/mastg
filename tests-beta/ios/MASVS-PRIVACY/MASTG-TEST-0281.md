@@ -24,7 +24,7 @@ These references can be used to match hardcoded or dynamically accessed domains 
 
 1. Extract the app's privacy manifest files, including those from third-party SDKs or frameworks using @MASTG-TECH-0136.
 2. Obtain the list of declared tracking domains from the privacy manifest files using @MASTG-TECH-0137.
-3. Run a static analysis scan using @MASTG-TOOL-0073:
+3. Run a @MASTG-TECH-0066 scan using @MASTG-TOOL-0073:
     - Search for hardcoded references to known tracking domains.
     - Identify code references to well-known tracking libraries.
 4. Perform network analysis with @MASTG-TOOL-0097:

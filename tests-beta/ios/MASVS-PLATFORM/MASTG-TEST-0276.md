@@ -23,8 +23,8 @@ The test statically analyzes the code for use of the general pasteboard ([`UIPas
 
 ## Steps
 
-1. Run a static analysis scan using @MASTG-TOOL-0073 to detect usage of the general pasteboard.
-2. Run a static analysis scan using @MASTG-TOOL-0073 to detect usage of the pasteboard methods which may be handling sensitive data.
+1. Run a @MASTG-TECH-0066 scan using @MASTG-TOOL-0073 to detect usage of the general pasteboard.
+2. Run a @MASTG-TECH-0066 scan using @MASTG-TOOL-0073 to detect usage of the pasteboard methods which may be handling sensitive data.
 
 ## Observation
 

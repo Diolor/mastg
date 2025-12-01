@@ -27,7 +27,7 @@ Android also provides additional guidance on [broken cryptographic algorithms](h
 
 ## Steps
 
-1. Run @MASTG-TECH-0014 with a tool such as @MASTG-TOOL-0110 on the app binary, or use @MASTG-TECH-0033 (dynamic analysis) with a tool like @MASTG-TOOL-0001, and look for uses of the cryptographic functions that perform encryption and decryption operations.
+1. Run @MASTG-TECH-0014 with a tool such as @MASTG-TOOL-0110 on the app code, or use @MASTG-TECH-0033 (dynamic analysis) with a tool like @MASTG-TOOL-0001, and look for uses of the cryptographic functions that perform encryption and decryption operations.
 
 ## Observation
 

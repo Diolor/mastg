@@ -17,7 +17,7 @@ In this test case, we will examine iOS applications for the presence of hardcode
 
 ## Steps
 
-1. Run a static analysis tool such as @MASTG-TOOL-0073 on the app binary looking for cryptographic APIs as indicated above.
+1. Run a @MASTG-TECH-0066 scan such as @MASTG-TOOL-0073 on the app binary looking for cryptographic APIs as indicated above.
 
 ## Observation
 

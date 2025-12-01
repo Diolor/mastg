@@ -20,7 +20,7 @@ For more information you can consult the MASTG section about ["Key Generation"](
 
 ## Steps
 
-1. Run a static analysis tool such as @MASTG-TOOL-0110 on the code and look for uses of the cryptographic functions that generate keys.
+1. Run @MASTG-TECH-0014 with a tool such as @MASTG-TOOL-0110 on the app code and look for uses of the cryptographic functions that generate keys.
 
 ## Observation
 

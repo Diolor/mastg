@@ -18,7 +18,7 @@ An Android app may have hardcoded HTTP URLs embedded in the app binary, library 
 ## Steps
 
 1. Reverse engineer the app (@MASTG-TECH-0017).
-2. Run a static analysis (@MASTG-TECH-0014) tool and look for any `http://` URLs.
+2. Run @MASTG-TECH-0014 with a tool such as @MASTG-TOOL-0110 and look for any `http://` URLs.
 
 ## Observation
 

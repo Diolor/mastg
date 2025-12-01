@@ -19,8 +19,8 @@ This test checks whether the app writes unencrypted sensitive data to private st
 
 ## Steps
 
-1. Run a static analysis tool such as @MASTG-TOOL-0073 and look for uses of file system APIs that create or write files.
-2. Run a static analysis tool such as @MASTG-TOOL-0073 and look for uses of Keychain APIs.
+1. Run a @MASTG-TECH-0066 scan such as @MASTG-TOOL-0073 and look for uses of file system APIs that create or write files.
+2. Run a @MASTG-TECH-0066 scan such as @MASTG-TOOL-0073 and look for uses of Keychain APIs.
 
 ## Observation
 

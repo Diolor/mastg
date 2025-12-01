@@ -19,7 +19,7 @@ Cryptographic keys may be embedded files such as configuration files or key file
 
 ## Steps
 
-1. Run a static analysis tool such as @MASTG-TOOL-0073 on the app binary looking for strings or sequences of bytes as indicated above.
+1. Run a @MASTG-TECH-0066 scan such as @MASTG-TOOL-0073 on the app binary looking for strings or sequences of bytes as indicated above.
 
 ## Observation
 
