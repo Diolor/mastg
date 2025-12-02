@@ -198,16 +198,40 @@ Data from other apps accessible via content providers (if the app has any and th
 
 Android offers a way for JavaScript execution in a WebView to call and use native functions of an Android app (annotated with `@JavascriptInterface`) by using the [`addJavascriptInterface`](https://developer.android.com/reference/android/webkit/WebView.html#addJavascriptInterface%28java.lang.Object,%20java.lang.String%29 "Method addJavascriptInterface()") method. This is known as a _WebView JavaScript bridge_ or _native bridge_.
 
-Please note that **when you use `addJavascriptInterface`, you're explicitly granting access to the registered JavaScript Interface object to all pages loaded within that WebView**. This implies that, if the user navigates outside your app or domain, all other external pages will also have access to those JavaScript Interface objects which might present a potential security risk if any sensitive data is being exposed though those interfaces.
+Please note that **when you use `addJavascriptInterface`, you're explicitly granting access to the registered JavaScript Interface object to all pages loaded within that WebView**. This implies that, if the user navigates outside your app or domain, all other external pages will also have access to those JavaScript Interface objects, which might present a potential security risk if any sensitive data is being exposed through those interfaces.
 
 > Warning: Take extreme care with apps targeting Android versions below Android 4.2 (API level 17) as they are [vulnerable to a flaw](https://labs.withsecure.com/publications/webview-addjavascriptinterface-remote-code-execution "WebView addJavascriptInterface Remote Code Execution") in the implementation of `addJavascriptInterface`: an attack that is abusing reflection, which leads to remote code execution when malicious JavaScript is injected into a WebView. This was due to all Java Object methods being accessible by default (instead of only those annotated).
 
 ## WebViews Cleanup
 
-Clearing the WebView resources is a crucial step when an app accesses any sensitive data within a WebView. This includes any files stored locally, the RAM cache and any loaded JavaScript.
+Android WebViews cache data when the server responds with specific `Cache-Control` headers that instruct the browser to cache the content. This cache is saved in the device's disk and/or RAM.
 
-As an additional measure, you could use server-side headers such as `no-cache`, which prevent an application from caching particular content.
+### Sensitive information storage areas
 
-> Starting on Android 10 (API level 29) apps are able to detect if a WebView has become [unresponsive](https://developer.android.com/about/versions/10/features?hl=en#webview-hung "WebView hung renderer detection"). If this happens, the OS will automatically call the `onRenderProcessUnresponsive` method.
+Sensitive information could be found or saved in several areas of a website, including, but not limited to:
+
+- DOM storage (local and session storage)
+- WebSQL (deprecated and removed in Chrome)
+- IndexedDB
+- Cookies (i.e., persistent, session, secure)
+- other files stored locally backed by the Origin Private File System (OPFS), such as the SQLite Wasm database
+
+> Note: WebSQL was deprecated in Android when version 15 was released. To learn more about the World Wide Web Consortium (W3C) recommendations, visit the [deprecation note](https://developer.android.com/about/versions/15/deprecations#websql-webview)
+
+### Clearing methods
+
+Clearing methods can be generic or granular and vary depending on the storage area that should be purged or the application's functionality.
+
+- **Cached files**: [`WebView.clearCache(includeDiskFiles = true)`](https://developer.android.com/reference/android/webkit/WebView#clearCache(boolean)) method can be called to delete both the RAM cache and files stored locally (i.e., images, JS, CSS). This is a per-application operation that clears the cache for all WebViews.
+- **WebStorage APIs**: [`WebStorage.clearAllData()`] Clears DOM storage (local and session storage), Web SQL Database, and HTML5 Web Storage APIs, including IndexedDB.
+- **Cookies**: [`CookieManager.removeAllCookies(ValueCallback<Boolean> ...)`] Clears all cookies.
+- **OPFS**: [`java.io.File.deleteRecursively`] Deletes the file.
+- **SQLite Wasm**: [`SQLiteDatabase.delete()`] to delete rows or [`SQLiteDatabase.deleteDatabase()`] to delete the database.
+
+## Unresponsive WebView Detection
+
+Starting on Android 10 (API level 29), apps can detect if a WebView has become [unresponsive](https://developer.android.com/about/versions/10/features?hl=en#webview-hung "WebView hung renderer detection"). If this happens, the OS will automatically call the `onRenderProcessUnresponsive` method.
+
+## Additional Resources
 
 You can find more security best practices when using WebViews on [Android Developers](https://developer.android.com/training/articles/security-tips?hl=en#WebView "Security Tips - Use WebView").

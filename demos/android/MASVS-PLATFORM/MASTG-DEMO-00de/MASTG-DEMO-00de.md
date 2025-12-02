@@ -1,9 +1,9 @@
 ---
 platform: android
 title: x
-id: MASTG-DEMO-00de
+id: MASTG-DEMO-00de // TODO allocate real ID
 code: [kotlin]
-test: MASTG-TEST-02te
+test: MASTG-TEST-02te // TODO allocate real ID
 ---
 
 ### Sample
