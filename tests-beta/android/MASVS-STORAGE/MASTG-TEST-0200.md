@@ -13,12 +13,11 @@ The goal of this test is to retrieve the files written to the external storage (
 
 ## Steps
 
-1. Make sure you have @MASTG-TOOL-0004 installed.
-2. Install the app (@MASTG-TECH-0005).
-3. Before running the app, get the current list of files (@MASTG-TECH-0002) in the external storage.
-4. Exercise the app.
-5. After running the app, retrieve the list of files in the external storage again.
-6. Calculate the difference between the two lists.
+1. Install the app (@MASTG-TECH-0005).
+2. Before running the app, get the current list of files (@MASTG-TECH-0002) in the external storage.
+3. Exercise the app.
+4. After running the app, retrieve the list of files in the external storage again.
+5. Calculate the difference between the two lists.
 
 ## Observation
 

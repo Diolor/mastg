@@ -14,13 +14,7 @@ Android apps use a variety of [APIs to access the external storage](../../../0x0
 
 ## Steps
 
-1. Make sure you have @MASTG-TOOL-0001 installed.
-2. Install the app.
-3. Execute a script to spawn the app with Frida and log all interactions with files.
-4. Navigate to the screen of the app that you want to analyse.
-5. Close the app to stop Frida.
-
-The Frida script should log all file interactions by hooking into the relevant APIs such as `getExternalStorageDirectory`, `getExternalStoragePublicDirectory`, `getExternalFilesDir` or `FileOutPutStream`. You could also use `open` as a catch-all for file interactions. However, this won't catch all file interactions, such as those that use the `MediaStore` API and should be done with additional filtering as it can generate a lot of noise.
+1. Use @MASTG-TECH-0033 to log all file interactions by hooking into the relevant APIs such as `getExternalStorageDirectory`, `getExternalStoragePublicDirectory`, `getExternalFilesDir` or `FileOutPutStream`. You could also use `open` as a catch-all for file interactions. However, this won't catch all file interactions, such as those that use the `MediaStore` API and should be done with additional filtering as it can generate a lot of noise.
 
 ## Observation
 
