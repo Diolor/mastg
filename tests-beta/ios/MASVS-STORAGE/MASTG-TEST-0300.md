@@ -19,8 +19,8 @@ This test checks whether the app writes unencrypted sensitive data to private st
 
 ## Steps
 
-1. Use @MASTG-TECH-0066 on the app binary to look for uses of file system APIs that create or write files.
-2. Use @MASTG-TECH-0066 on the app binary to look for uses of Keychain APIs.
+1. Use @MASTG-TECH-0066 to look for uses of file system APIs that create or write files.
+2. Use @MASTG-TECH-0066 to look for uses of Keychain APIs.
 
 ## Observation
 

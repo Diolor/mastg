@@ -14,7 +14,7 @@ This test checks whether the app writes sensitive data unencrypted to storage lo
 
 ## Steps
 
-1. Use @MASTG-TECH-0066 on the app binary to look for APIs that indicate use of shared storage, for example:
+1. Use @MASTG-TECH-0066 to look for APIs that indicate use of shared storage, for example:
 
       - [`documentDirectory`](https://developer.apple.com/documentation/foundation/filemanager/searchpathdirectory/documentdirectory) (commonly exposed via iTunes File Sharing / Files app)
       - `FileManager.default.urls(for:in:)` with `documentDirectory`

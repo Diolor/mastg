@@ -18,8 +18,8 @@ In contrast, the **Keychain** API securely stores sensitive data, and can be con
 
 ## Steps
 
-1. Run a @MASTG-TECH-0066 scan using @MASTG-TOOL-0073 to detect usage of `LAContext.evaluatePolicy`
-2. Run a @MASTG-TECH-0066 scan using @MASTG-TOOL-0073 to detect usage of Keychain APIs, especially `SecAccessControlCreateWithFlags` (which should go accompanied by other APIs such as `SecItemAdd` and `SecItemCopyMatching`).
+1. Use @MASTG-TECH-0066 to look for uses of `LAContext.evaluatePolicy`
+2. Use @MASTG-TECH-0066 to look for uses of Keychain APIs, especially `SecAccessControlCreateWithFlags` (which should go accompanied by other APIs such as `SecItemAdd` and `SecItemCopyMatching`).
 
 ## Observation
 

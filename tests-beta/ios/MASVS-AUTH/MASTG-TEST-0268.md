@@ -18,7 +18,7 @@ The `kSecAccessControlUserPresence` flag is described in the Apple docs as the o
 
 ## Steps
 
-1. Run a @MASTG-TECH-0066 scan using @MASTG-TOOL-0073 to detect usage of `SecAccessControlCreateWithFlags` with the `kSecAccessControlUserPresence` or `kSecAccessControlDevicePasscode` flags.
+1. Use @MASTG-TECH-0066 to look for uses of `SecAccessControlCreateWithFlags` with the `kSecAccessControlUserPresence` or `kSecAccessControlDevicePasscode` flags.
 
 ## Observation
 

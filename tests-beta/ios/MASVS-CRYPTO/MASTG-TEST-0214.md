@@ -19,7 +19,7 @@ Cryptographic keys may be embedded files such as configuration files or key file
 
 ## Steps
 
-1. Use @MASTG-TECH-0066 on the app binary to look for strings or sequences of bytes as indicated above.
+1. Use @MASTG-TECH-0066 to look for strings or sequences of bytes as indicated above.
 
 ## Observation
 

@@ -16,7 +16,7 @@ The test identifies the absence of the [`kSecAccessControlBiometryCurrentSet`](h
 
 ## Steps
 
-1. Use @MASTG-TECH-0066 on the app binary to look for uses of [`SecAccessControlCreateWithFlags`](https://developer.apple.com/documentation/security/secaccesscontrolcreatewithflags(_:_:_:_:)) API with [`kSecAccessControlBiometryCurrentSet`](https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/biometrycurrentset) flag.
+1. Use @MASTG-TECH-0066 to look for uses of [`SecAccessControlCreateWithFlags`](https://developer.apple.com/documentation/security/secaccesscontrolcreatewithflags(_:_:_:_:)) API with [`kSecAccessControlBiometryCurrentSet`](https://developer.apple.com/documentation/security/secaccesscontrolcreateflags/biometrycurrentset) flag.
 
 ## Observation
 

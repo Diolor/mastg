@@ -19,7 +19,7 @@ Android apps specify a `minSdkVersion`, which defines the oldest OS version they
 
 ## Steps
 
-1. Use either @MASTG-TECH-0014 with a tool such as @MASTG-TOOL-0110 to identify APIs that check the version of the operating system.
+1. Use @MASTG-TECH-0014 to look for APIs that check the version of the operating system.
 
 ## Observation
 

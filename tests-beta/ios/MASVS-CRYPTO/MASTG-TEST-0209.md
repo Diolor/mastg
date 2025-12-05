@@ -19,7 +19,7 @@ Since you don't usually generate keys directly in CryptoKit (the library does th
 
 ## Steps
 
-1. Use @MASTG-TECH-0066 on the app binary or use a dynamic analysis tool like @MASTG-TOOL-0039 to look for uses of the cryptographic functions that generate keys.
+1. Use @MASTG-TECH-0066 or @MASTG-TECH-0067 to look for uses of the cryptographic functions that generate keys.
 
 ## Observation
 

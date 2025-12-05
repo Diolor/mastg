@@ -18,7 +18,7 @@ In this test, we will use static analysis to verify whether an app has any loggi
 
 ## Steps
 
-1. Use @MASTG-TECH-0066 on the app binary to look for uses of logging APIs.
+1. Use @MASTG-TECH-0066 to look for uses of logging APIs.
 
 ## Observation
 

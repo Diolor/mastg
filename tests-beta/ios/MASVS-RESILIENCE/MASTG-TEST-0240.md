@@ -16,7 +16,7 @@ The limitations of static analysis should be considered. It is possible that the
 
 ## Steps
 
-1. Use @MASTG-TECH-0066 on the app binary to look for common jailbreak detection checks.
+1. Use @MASTG-TECH-0066 to look for common jailbreak detection checks.
 
 ## Observation
 

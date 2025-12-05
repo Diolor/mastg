@@ -14,8 +14,8 @@ This test checks if the app restricts the contents of the general [pasteboard](.
 
 ## Steps
 
-1. Run a @MASTG-TECH-0066 scan using @MASTG-TOOL-0073 to detect usage of the [`UIPasteboard.general`](https://developer.apple.com/documentation/uikit/uipasteboard/1622106-generalpasteboard "UIPasteboard generalPasteboard") property.
-2. Run a @MASTG-TECH-0066 scan using @MASTG-TOOL-0073 to detect usage of the `UIPasteboard.setItems(_:options:)` method.
+1. Use @MASTG-TECH-0066 to look for uses of [`UIPasteboard.general`](https://developer.apple.com/documentation/uikit/uipasteboard/1622106-generalpasteboard "UIPasteboard generalPasteboard") property.
+2. Use @MASTG-TECH-0066 to look for uses of `UIPasteboard.setItems(_:options:)` method.
 
 ## Observation
 
