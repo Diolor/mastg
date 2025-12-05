@@ -53,7 +53,7 @@ Error reading file: 0
 ## Steps
 
 1. Determine the `minSdkVersion` of the app.
-2. Run @MASTG-TECH-0014 with a tool such as @MASTG-TOOL-0110 to search for references to:
+2. Use @MASTG-TECH-0014 to look for references to:
       - the `WebView` class.
       - the `WebSettings` class.
       - the `setJavaScriptEnabled` method.

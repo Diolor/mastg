@@ -13,7 +13,7 @@ In this test case, we will look for the use of hardcoded keys in Android applica
 
 ## Steps
 
-1. Use either @MASTG-TECH-0014 with a tool such as @MASTG-TOOL-0110 or @MASTG-TECH-0033 (dynamic analysis) with a tool like @MASTG-TOOL-0001 to identify all the instances of symmetric key encryption in code and look for uses of the hardcoded cryptographic keys.
+1. Use @MASTG-TECH-0014 or @MASTG-TECH-0033 to look for all the instances of symmetric key encryption in code and look for uses of the hardcoded cryptographic keys.
 
 ## Observation
 

@@ -28,7 +28,7 @@ The API call `okhttp3.ConnectionSpec.Builder.tlsVersions(...)` can also be used 
 ## Steps
 
 1. Reverse engineer the app (@MASTG-TECH-0017).
-2. Run @MASTG-TECH-0014 with a tool such as @MASTG-TOOL-0110 on the reverse engineered app targeting calls to APIs setting the TLS protocol.
+2. Use @MASTG-TECH-0014 on the reverse-engineered app to look for calls to APIs setting the TLS protocol.
 
 ## Observation
 

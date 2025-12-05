@@ -18,7 +18,7 @@ However, the code implements a custom `HostnameVerifier` that performs hostname 
 ## Steps
 
 1. Reverse engineer the app (@MASTG-TECH-0017).
-2. Run @MASTG-TECH-0014 with a tool such as @MASTG-TOOL-0110 and look for all usages of `SSLSocket` and `HostnameVerifier`.
+2. Use @MASTG-TECH-0014 to look for all usages of `SSLSocket` and `HostnameVerifier`.
 
 {{ ../../../../rules/mastg-android-ssl-socket-hostnameverifier.yml }}
 

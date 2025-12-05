@@ -16,7 +16,7 @@ Such unsafe implementations can allow an attacker to run a [MITM attack](../../.
 ## Steps
 
 1. Reverse engineer the app (@MASTG-TECH-0017).
-2. Inspect the source code and run a static analysis (@MASTG-TECH-0014) tool and look for all usages of `HostnameVerifier`.
+2. Inspect the source code and use @MASTG-TECH-0014 to look for all usages of `HostnameVerifier`.
 
 ## Observation
 

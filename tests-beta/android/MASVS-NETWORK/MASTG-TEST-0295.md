@@ -15,7 +15,7 @@ This test checks whether the Android app ensures the Security Provider (@MASTG-K
 ## Steps
 
 1. Reverse engineer the app (@MASTG-TECH-0017).
-2. Use static analysis (@MASTG-TECH-0014) to search for usage of `ProviderInstaller.installIfNeeded` or `ProviderInstaller.installIfNeededAsync`.
+2. Use MASTG-TECH-0014 to look for usage of `ProviderInstaller.installIfNeeded` or `ProviderInstaller.installIfNeededAsync`.
 
 ## Observation
 

@@ -18,7 +18,7 @@ This effectively bypasses SSL certificate checks in the `WebView`, exposing the 
 ## Steps
 
 1. Reverse engineer the app (@MASTG-TECH-0017).
-2. Inspect the source code and run a static analysis (@MASTG-TECH-0014) tool and look for all usages of `onReceivedSslError(...)`.
+2. Inspect the source code and use @MASTG-TECH-0014 to look for all usages of `onReceivedSslError(...)`.
 
 ## Observation
 

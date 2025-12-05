@@ -23,7 +23,7 @@ The [`KeyGenParameterSpec.Builder`](https://developer.android.com/reference/andr
 
 ## Steps
 
-1. Run static analysis (@MASTG-TECH-0014) on the app and look for key generation code for asymmetric keys.
+1. Use @MASTG-TECH-0014 to look for key generation code for asymmetric keys.
 
 ## Observation
 

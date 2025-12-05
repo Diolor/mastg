@@ -47,7 +47,7 @@ While the `fetch` request to the external server would still work, retrieving th
 
 ## Steps
 
-1. Run @MASTG-TECH-0014 with a tool such as @MASTG-TOOL-0110 to search for references to:
+1. Use @MASTG-TECH-0014 to look for references to:
       - the `WebView` class.
       - the `WebSettings` class.
       - the `setJavaScriptEnabled` method.

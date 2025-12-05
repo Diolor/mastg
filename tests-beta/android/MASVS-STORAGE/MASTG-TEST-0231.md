@@ -15,7 +15,7 @@ This test verifies if an app uses [logging APIs](../../../0x05d-Testing-Data-Sto
 
 ## Steps
 
-1. Use either @MASTG-TECH-0014 with a tool such as @MASTG-TOOL-0110 to identify all logging APIs.
+1. Use @MASTG-TECH-0014 to look for all logging APIs.
 
 ## Observation
 
