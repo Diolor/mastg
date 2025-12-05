@@ -185,7 +185,7 @@ Example:
 ```md
 ## Steps
 
-1. Run @MASTG-TECH-0014 on the app and look for insecure random APIs.
+1. Use @MASTG-TECH-0014 to look for insecure random APIs.
 ```
 
 Notes:
