@@ -128,4 +128,4 @@ The iOS jailbreak scene evolves so rapidly that providing up-to-date instruction
 - [Reddit Jailbreak](https://www.reddit.com/r/jailbreak/ "Reddit Jailbreak")
 
 !!! note
-     Any modification you make to your device is at your own risk. While jailbreaking is typically safe, things can go wrong, and you may end up bricking your device. No other party except yourself can be held accountable for any damage.
+    Any modification you make to your device is at your own risk. While jailbreaking is typically safe, things can go wrong, and you may end up bricking your device. No other party except yourself can be held accountable for any damage.

@@ -19,4 +19,4 @@ Google                         Google LLC  82.57MB   30 Aug 2019  com.google.and
 ```
 
 !!! note
-     Regional (Google Play) restrictions apply when using gplaycli. To access apps restricted in your country, you can use alternative app stores, such as those described in @MASTG-TECH-0003.
+    Regional (Google Play) restrictions apply when using gplaycli. To access apps restricted in your country, you can use alternative app stores, such as those described in @MASTG-TECH-0003.
