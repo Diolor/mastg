@@ -1,24 +1,15 @@
-{
-  "id": "6a670e3e-7d93-4deb-9f66-cf796fa51dc6",
-  "category": "PLATFORM",
-  "time": "2025-11-25T15:16:42.141Z",
-  "class": "android.webkit.WebStorage",
-  "method": "getInstance",
-  "stackTrace": [
-    "android.webkit.WebStorage.getInstance(Native Method)",
-    "org.owasp.mastestapp.MainActivityWebView.onDestroy(MainActivityWebView.kt:42)",
-    "android.app.Activity.performDestroy(Activity.java:9460)",
-    "android.app.Instrumentation.callActivityOnDestroy(Instrumentation.java:1556)",
-    "android.app.ActivityThread.performDestroyActivity(ActivityThread.java:6256)",
-    "android.app.ActivityThread.handleDestroyActivity(ActivityThread.java:6301)",
-    "android.app.servertransaction.DestroyActivityItem.execute(DestroyActivityItem.java:52)",
-    "android.app.servertransaction.ActivityTransactionItem.execute(ActivityTransactionItem.java:63)"
-  ],
-  "inputParameters": [],
-  "returnValue": [
-    {
-      "type": "android.webkit.WebStorage",
-      "value": "<instance: android.webkit.WebStorage, $className: com.android.webview.chromium.g>"
-    }
-  ]
-}
+Enumerating chromium...
+[
+  {
+    "loader": "<instance: java.lang.ClassLoader, $className: dalvik.system.PathClassLoader>",
+    "classes": [
+      {
+        "name": "com.android.webview.chromium.g",
+        "methods": [
+          "deleteAllData"
+        ]
+      }
+    ]
+  }
+]
+WebStorage.deleteAllData() called

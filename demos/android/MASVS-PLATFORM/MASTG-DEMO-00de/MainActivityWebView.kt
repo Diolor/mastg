@@ -30,6 +30,9 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 
 class MainActivityWebView : ComponentActivity() {
+
+    private val webStorage = WebStorage.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -39,7 +42,7 @@ class MainActivityWebView : ComponentActivity() {
     }
 
     override fun onDestroy() {
-        WebStorage.getInstance().deleteAllData()
+        webStorage.deleteAllData()
         super.onDestroy()
     }
 }
