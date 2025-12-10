@@ -1,5 +1,3 @@
-// hook-delete-all-data.js
-
 Java.perform(() => {
   console.log('Enumerating chromium...');
   let methods = Java.enumerateMethods('com.android.webview.chromium.*!deleteAllData')
@@ -9,12 +7,11 @@ Java.perform(() => {
   let loader = method.loader;
   let clazz = method.classes[0].name;
 
-  Java.classFactory.loader = loader // 🧙 Change the loader to chromium and not our default apk
+  Java.classFactory.loader = loader;
 
   const WebStorageAdapter = Java.use(clazz);
   WebStorageAdapter.deleteAllData.implementation = function() {
     console.log('WebStorage.deleteAllData() called');
-    // Optionally, you can call the original method if needed
     return this.deleteAllData();
   }
 });
