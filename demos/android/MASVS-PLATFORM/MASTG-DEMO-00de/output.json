@@ -1,15 +1,4 @@
 Enumerating chromium...
-[
-  {
-    "loader": "<instance: java.lang.ClassLoader, $className: dalvik.system.PathClassLoader>",
-    "classes": [
-      {
-        "name": "com.android.webview.chromium.g",
-        "methods": [
-          "deleteAllData"
-        ]
-      }
-    ]
-  }
-]
+Bring WebStorage to memory so we can hook its deleteAllData() method.
+WebStorage.deleteAllData() hooked.
 WebStorage.deleteAllData() called

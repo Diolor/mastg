@@ -1,7 +1,6 @@
 package org.owasp.mastestapp
 
 import android.os.Bundle
-import android.util.Log
 import android.webkit.WebStorage
 import android.webkit.WebView
 import androidx.activity.ComponentActivity
@@ -30,9 +29,6 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 
 class MainActivityWebView : ComponentActivity() {
-
-    private val webStorage = WebStorage.getInstance()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -41,9 +37,9 @@ class MainActivityWebView : ComponentActivity() {
         }
     }
 
-    override fun onDestroy() {
-        webStorage.deleteAllData()
-        super.onDestroy()
+    override fun onStop() {
+        WebStorage.getInstance().deleteAllData()
+        super.onStop()
     }
 }
 
