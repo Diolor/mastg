@@ -21,7 +21,7 @@ The code snippet below shows a sample that uses a WebView to load sensitive data
 5. Wait for the Frida script to capture the WebView cleanup calls
 6. Stop the script by quitting the Frida CLI
 
-{{ hooks.js # run.sh }}
+{{ script.js # run.sh }}
 
 ### Observation
 
