@@ -216,17 +216,53 @@ Sensitive information could be found or saved in several areas of a website, inc
 - Cookies (i.e., persistent, session, secure)
 - other files stored locally backed by the Origin Private File System (OPFS), such as the SQLite Wasm database
 
-> Note: WebSQL was deprecated in Android when version 15 was released. To learn more about the World Wide Web Consortium (W3C) recommendations, visit the [deprecation note](https://developer.android.com/about/versions/15/deprecations#websql-webview)
+!!! note
+    WebSQL was deprecated in Android with version 15. To learn more about the World Wide Web Consortium (W3C) recommendations, visit the [deprecation note](https://developer.android.com/about/versions/15/deprecations#websql-webview)
 
 ### Clearing methods
 
 Clearing methods can be generic or granular and vary depending on the storage area that should be purged or the application's functionality.
 
 - **Cached files**: [`WebView.clearCache(includeDiskFiles = true)`](https://developer.android.com/reference/android/webkit/WebView#clearCache(boolean)) method can be called to delete both the RAM cache and files stored locally (i.e., images, JS, CSS). This is a per-application operation that clears the cache for all WebViews.
-- **WebStorage APIs**: [`WebStorage.clearAllData()`] Clears DOM storage (local and session storage), Web SQL Database, and HTML5 Web Storage APIs, including IndexedDB.
-- **Cookies**: [`CookieManager.removeAllCookies(ValueCallback<Boolean> ...)`] Clears all cookies.
-- **OPFS**: [`java.io.File.deleteRecursively`] Deletes the file.
-- **SQLite Wasm**: [`SQLiteDatabase.delete()`] to delete rows or [`SQLiteDatabase.deleteDatabase()`] to delete the database.
+- **WebStorage APIs**: [`WebStorage.deleteAllData()`](https://developer.android.com/reference/android/webkit/WebStorage#deleteAllData()) Clears DOM storage (local and session storage), Web SQL Database, and HTML5 Web Storage APIs, including IndexedDB.
+- **Cookies**: [`CookieManager.removeAllCookies(ValueCallback<Boolean> ...)`](https://developer.android.com/reference/android/webkit/CookieManager#removeAllCookies(android.webkit.ValueCallback%3Cjava.lang.Boolean%3E)) Clears all cookies.
+- **OPFS**: [`java.io.File.deleteRecursively`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/java.io.-file/delete-recursively.html) Deletes the file.
+- **SQLite Wasm**: [`SQLiteDatabase.delete()`](https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#delete(java.lang.String,%20java.lang.String,%20java.lang.String[])) to delete rows or [`SQLiteDatabase.deleteDatabase()`](https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#deleteDatabase(java.io.File)) to delete the database.
+
+**Example:**
+
+This example in Kotlin from the [open source Firefox Focus](https://github.com/mozilla-mobile/focus-android/blob/v8.17.1/app/src/main/java/org/mozilla/focus/webview/SystemWebView.kt#L220 "Firefox Focus for Android") app shows different cleanup steps:
+
+```Java
+override fun cleanup() {
+    clearFormData() // Removes the autocomplete popup from the currently focused form field, if present. Note that this only affects the display of the autocomplete popup. It does not remove any saved form data from this WebView's store. To do that, use WebViewDatabase#clearFormData.
+    clearHistory()
+    clearMatches()
+    clearSslPreferences()
+    clearCache(true)
+
+    CookieManager.getInstance().removeAllCookies(null)
+
+    WebStorage.getInstance().deleteAllData() // Clears all storage currently being used by the JavaScript storage APIs. This includes the Application Cache, Web SQL Database, and the HTML5 Web Storage APIs.
+
+    val webViewDatabase = WebViewDatabase.getInstance(context)
+    // It isn't entirely clear how this differs from WebView.clearFormData()
+    @Suppress("DEPRECATION")
+    webViewDatabase.clearFormData() // Clears any saved data for web forms.
+    webViewDatabase.clearHttpAuthUsernamePassword()
+
+    deleteContentFromKnownLocations(context) // Calls FileUtils.deleteWebViewDirectory(context) which deletes all content in "app_webview".
+}
+```
+
+The function finishes with some extra _manual_ file deletion in `deleteContentFromKnownLocations` which calls functions from [`FileUtils`](https://github.com/mozilla-mobile/focus-android/blob/v8.17.1/app/src/main/java/org/mozilla/focus/utils/FileUtils.kt#L24-L44). These functions use the [`java.io.File.deleteRecursively`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/java.io.-file/delete-recursively.html) method to delete files from the specified directories recursively.
+
+```Java
+private fun deleteContent(directory: File, doNotEraseWhitelist: Set<String> = emptySet()): Boolean {
+    val filesToDelete = directory.listFiles()?.filter { !doNotEraseWhitelist.contains(it.name) } ?: return false
+    return filesToDelete.all { it.deleteRecursively() }
+}
+```
 
 ## Unresponsive WebView Detection
 

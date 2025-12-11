@@ -14,6 +14,7 @@ prerequisites:
 
 This test verifies that the application cleans up sensitive information used by WebViews.
 
+// TODO
 @MASTG-KNOW-0018 describes the different storage areas used by WebViews.
 
 ## Steps
