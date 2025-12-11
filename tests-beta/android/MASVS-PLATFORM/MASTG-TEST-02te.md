@@ -26,7 +26,7 @@ This test verifies that the application cleans up sensitive information used by 
 
 ## Observation
 
-The output should list the locations in the app where webview cleanup APIs are used during the current execution.
+The output should list the locations in the app where WebView cleanup APIs are used during the current execution or the lack of them.
 
 ## Evaluation
 
