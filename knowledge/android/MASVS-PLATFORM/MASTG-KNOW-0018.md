@@ -215,15 +215,15 @@ Sensitive information could be found or saved in several areas of a website, inc
 - **WebSQL** (deprecated and removed in Chrome)
 - **IndexedDB**
 - **Cookies** (i.e., persistent, session, secure)
-- Other files stored locally backed by the **Origin Private File System (OPFS)**, such as the **SQLite Wasm** database
+- Other files stored locally backed by the **Origin Private File System (OPFS)**, such as the [**SQLite Wasm**](https://developer.chrome.com/blog/sqlite-wasm-in-the-browser-backed-by-the-origin-private-file-system) database
 
-An indication that an app might be initializing the WebView in a way to allow storing certain information by using [`setCacheMode`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#setCacheMode(kotlin.Int)), [`setDomStorageEnabled`](https://developer.android.com/reference/android/webkit/WebSettings#setDomStorageEnabled(boolean)), or [`setDatabaseEnabled`](https://developer.android.com/reference/android/webkit/WebSettings#setDatabaseEnabled(boolean)) from [`android.webkit.WebSettings`](https://developer.android.com/reference/android/webkit/WebSettings "WebSettings"). Cache is enabled by default, while DOM Storage and Database Storage APIs are disabled by default, but apps can explicitly set them to "true".
-
-!!! note 
-    The `WebSettings.setAppCacheEnabled()` method was removed in Android 13 (API level 33) in favor of [`setCacheMode()`](https://developer.android.com/reference/android/webkit/WebSettings#setCacheMode(int)).
+An indication that an app might be initializing the WebView in a way to allow storing certain information by using [`WebSettings.setCacheMode`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#setCacheMode(kotlin.Int)), [`WebSettings.setDomStorageEnabled`](https://developer.android.com/reference/android/webkit/WebSettings#setDomStorageEnabled(boolean)), or [`WebSettings.setDatabaseEnabled`](https://developer.android.com/reference/android/webkit/WebSettings#setDatabaseEnabled(boolean)) from [`android.webkit.WebSettings`](https://developer.android.com/reference/android/webkit/WebSettings "WebSettings"). Cache is enabled by default, while DOM Storage and Database Storage APIs are disabled by default, but apps can explicitly set them to "true".
 
 !!! note
-    WebSQL was deprecated in Android version 15 (API level 35), including related methods such as [`setDatabaseEnabled()`](https://developer.android.com/reference/android/webkit/WebSettings#setDatabaseEnabled(boolean)). To learn more about the World Wide Web Consortium (W3C) recommendations, visit the [deprecation note](https://developer.android.com/about/versions/15/deprecations#websql-webview)
+    The `WebSettings.setAppCacheEnabled()` method was removed in Android 13 (API level 33) in favor of [`WebSettings.setCacheMode()`](https://developer.android.com/reference/android/webkit/WebSettings#setCacheMode(int)).
+
+!!! note
+    WebSQL was deprecated in Android version 15 (API level 35), including related methods such as [`WebSettings.setDatabaseEnabled()`](https://developer.android.com/reference/android/webkit/WebSettings#setDatabaseEnabled(boolean)). To learn more about the World Wide Web Consortium (W3C) recommendations, visit the [deprecation note](https://developer.android.com/about/versions/15/deprecations#websql-webview)
 
 ### Clearing methods
 

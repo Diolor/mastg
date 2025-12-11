@@ -1,6 +1,6 @@
 ---
 platform: android
-title: Testing WebViews DOM storage Cleanup
+title: Testing WebViews Cleanup
 id: MASTG-TEST-02te // TODO allocate real ID
 type: [dynamic, manual]
 weakness: MASWE-0118
@@ -12,7 +12,12 @@ prerequisites:
 
 ## Overview
 
-This test verifies that the application cleans up sensitive information used by WebViews in DOM storage (local and session storage). @MASTG-KNOW-0018 describes the different storage areas used by WebViews.
+This test verifies that the application cleans up sensitive information used by WebViews. @MASTG-KNOW-0018 describes the different storage areas used by WebViews.
+
+- When `WebSettings.setAppCacheEnabled()` is enabled or [`WebSettings.setCacheMode()`](https://developer.android.com/reference/android/webkit/WebSettings#setCacheMode(int)) is any value other than [`LOAD_NO_CACHE`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#LOAD_NO_CACHE:kotlin.Int), [`WebView.clearCache(includeDiskFiles = true)`](https://developer.android.com/reference/android/webkit/WebView#clearCache(boolean)) should be called.
+- When [`setDomStorageEnabled`](https://developer.android.com/reference/android/webkit/WebSettings#setDomStorageEnabled(boolean)) is enabled, [`WebStorage.deleteAllData()`](https://developer.android.com/reference/android/webkit/WebView#clearFormData()) should be called.
+- When [`WebSettings.setDatabaseEnabled()`](https://developer.android.com/reference/android/webkit/WebSettings#setDatabaseEnabled(boolean)) is enabled, [`WebStorage.deleteAllData()`](https://developer.android.com/reference/android/webkit/WebView#clearFormData()) should be called.
+- When [`CookieManager.setAcceptCookie()`](https://developer.android.com/reference/android/webkit/CookieManager#setAcceptCookie(boolean)) is not explicitly set to `false` (default is set to `true`), [`CookieManager.removeAllCookies(ValueCallback<Boolean> ...)`](https://developer.android.com/reference/android/webkit/CookieManager#removeAllCookies(android.webkit.ValueCallback%3Cjava.lang.Boolean%3E)) should be called.
 
 ## Steps
 
