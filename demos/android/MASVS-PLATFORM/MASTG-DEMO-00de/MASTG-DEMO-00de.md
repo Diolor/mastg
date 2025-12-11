@@ -31,4 +31,4 @@ The output shows all instances of `deleteAllData()` of `WebStorage` called at ru
 
 ### Evaluation
 
-The test **succeeds** as the application properly cleans up all storage data from the WebView cache using the `WebStorage` API.
+The test **passes** as the application properly cleans up all storage data from the WebView cache using the `WebStorage` API.
