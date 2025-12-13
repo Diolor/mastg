@@ -272,10 +272,6 @@ private fun deleteContent(directory: File, doNotEraseWhitelist: Set<String> = em
 }
 ```
 
-## Unresponsive WebView Detection
-
-Starting on Android 10 (API level 29), apps can detect if a WebView has become [unresponsive](https://developer.android.com/about/versions/10/features?hl=en#webview-hung "WebView hung renderer detection"). If this happens, the OS will automatically call the `onRenderProcessUnresponsive` method.
-
 ## Additional Resources
 
 You can find more security best practices when using WebViews on [Android Developers](https://developer.android.com/training/articles/security-tips?hl=en#WebView "Security Tips - Use WebView").
