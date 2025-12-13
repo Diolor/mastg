@@ -229,11 +229,13 @@ An indication that an app might be initializing the WebView in a way to allow st
 
 Clearing methods can be generic or granular and vary depending on the storage area that should be purged or the application's functionality.
 
-- **Cached files**: [`WebView.clearCache(includeDiskFiles = true)`](https://developer.android.com/reference/android/webkit/WebView#clearCache(boolean)) method can be called to delete both the RAM cache and files stored locally (i.e., images, JS, CSS). This is a per-application operation that clears the cache for all WebViews.
-- **WebStorage APIs**: [`WebStorage.deleteAllData()`](https://developer.android.com/reference/android/webkit/WebStorage#deleteAllData()) Clears DOM storage (local and session storage), Web SQL Database, and HTML5 Web Storage APIs, including IndexedDB.
-- **Cookies**: [`CookieManager.removeAllCookies(ValueCallback<Boolean> ...)`](https://developer.android.com/reference/android/webkit/CookieManager#removeAllCookies(android.webkit.ValueCallback%3Cjava.lang.Boolean%3E)) Clears all cookies.
-- **OPFS**: [`java.io.File.deleteRecursively`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/java.io.-file/delete-recursively.html) Deletes the file.
-- **SQLite Wasm**: [`SQLiteDatabase.delete()`](https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#delete(java.lang.String,%20java.lang.String,%20java.lang.String[])) to delete rows or [`SQLiteDatabase.deleteDatabase()`](https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#deleteDatabase(java.io.File)) to delete the database.
+- **Cached files**: [`WebView.clearCache(includeDiskFiles = true)`](https://developer.android.com/reference/android/webkit/WebView#clearCache(boolean)) can be called to delete both the RAM cache and files stored locally (i.e., images, JS, CSS). This is a per-application operation that clears the cache for all WebViews.
+- **WebStorage APIs**: [`WebStorage.deleteAllData()`](https://developer.android.com/reference/android/webkit/WebStorage#deleteAllData()) clears DOM storage (local and session storage), Web SQL Database, and HTML5 Web Storage APIs, including IndexedDB.
+- **Cookies**: [`CookieManager.removeAllCookies(ValueCallback<Boolean> ...)`](https://developer.android.com/reference/android/webkit/CookieManager#removeAllCookies(android.webkit.ValueCallback%3Cjava.lang.Boolean%3E)) clears all cookies.
+- **OPFS**: [`java.io.File.deleteRecursively`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/java.io.-file/delete-recursively.html) deletes files recursively.
+- **SQLite Wasm**:
+    - [`SQLiteDatabase.delete()`](https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#delete(java.lang.String,%20java.lang.String,%20java.lang.String[])) deletes rows
+    - [`SQLiteDatabase.deleteDatabase()`](https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#deleteDatabase(java.io.File)) deletes the whole database.
 
 **Example:**
 
