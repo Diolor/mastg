@@ -272,6 +272,15 @@ private fun deleteContent(directory: File, doNotEraseWhitelist: Set<String> = em
 }
 ```
 
+### Challenges of Testing WebView Cache Cleanup
+
+Testing WebView cleanup is a complex task that requires extensive information gathering and has several challenges:
+
+1. Firstly, the tester needs to identify the number of WebView instances and their respective `WebSettings`, and any potential correlation to ensure confinement of test results to only the tested WebView instance.
+2. Secondly, for each WebView instance, the tester needs to identify how the storage areas are configured and how the data is actually being stored based on HTTP cache headers and web storage configuration.
+3. Thirdly, the tester must determine the lifecycle of every sensitive data item and its designated retention period.
+4. Finally, there is a lack of a guarantee that the clear methods will always be called, particularly if the app process is killed abruptly before those occur (e.g., due to a system process kill), and in sequence if mitigation measures exist for these scenarios.
+
 ## Additional Resources
 
 You can find more security best practices when using WebViews on [Android Developers](https://developer.android.com/training/articles/security-tips?hl=en#WebView "Security Tips - Use WebView").
