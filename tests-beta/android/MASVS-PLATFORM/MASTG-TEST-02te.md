@@ -45,4 +45,4 @@ The test case also passes if the Storage APIs are enabled and their **relevant**
 The test case fails if Storage APIs are enabled and their **relevant** cleanup APIs are **not** called.
 
 !!! note
-    The optional observation number 3 can be used to determine whether the WebView stores sensitive data and reduce false negatives.
+    The optional observation number 3 can be used to determine whether the WebView stores sensitive data and reduces false negatives.
