@@ -3,7 +3,7 @@ title: Host-Device Data Transfer
 platform: ios
 ---
 
-There are various scenarios where you may need to transfer data between the iOS device or app sandbox and your host computer, or vice versa. The following section outlines different ways to achieve that.
+There are various scenarios where you may need to transfer data between the iOS device or app sandbox and your host computer. The following section outlines different ways to achieve that.
 
 ## Copying App Data Files via SSH and SCP
 
@@ -17,7 +17,7 @@ $ scp -P 2222 root@localhost:/tmp/data.tgz .
 
 ## Grapefruit
 
-After starting @MASTG-TOOL-0061, you can select the app in scope for testing. There are various functions available, of which one is called "Finder". When you select it, you will see a list of the app sandbox directories.
+After starting @MASTG-TOOL-0061, you can select the app in scope for testing. There are various functions available, including one called "Finder". When you select it, you will see a list of the app sandbox directories.
 
 <img src="Images/Chapters/0x06b/grapefruit_data_dir.png" width="100%" />
 
