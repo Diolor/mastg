@@ -19,7 +19,7 @@ There are generally two approaches to this: **@MASTG-TOOL-0100** and **@MASTG-TO
 
 1. Patch the app to enable traffic interception.
 
-    Run the command to patch the app, select the **Traffic monitoring and interception**option, and enter the IP address of the machine running the interception proxy.
+    Run the command to patch the app, select the **Traffic monitoring and interception** option, and enter the IP address of the machine running the interception proxy.
 
     ```plaintext
     $ reflutter demo.ipa
