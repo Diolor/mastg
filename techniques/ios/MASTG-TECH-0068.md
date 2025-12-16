@@ -9,7 +9,7 @@ On iOS, all the application code (both Swift and Objective-C) is compiled to mac
 
 If you want to disassemble an application from the App Store, remove the FairPlay DRM first. See @MASTG-TECH-0054 for more information.
 
-In this context, the term "app binary" refers to the Mach-O file in the application bundle, which contains the compiled code and should not be confused with the application bundle – the IPA file. See @MASTG-TECH-0058 for more details on the composition of IPA files.
+In this context, the term "app binary" refers to the Mach-O file in the application bundle, which contains the compiled code and should not be confused with the application bundle - the IPA file. See @MASTG-TECH-0058 for more details on the composition of IPA files.
 
 ## Disassembling With IDA Pro
 

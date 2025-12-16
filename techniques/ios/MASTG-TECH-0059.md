@@ -100,7 +100,7 @@ $ cd ~/Library/Developer/CoreSimulator/Devices/$(ls -alht ~/Library/Developer/Co
 
 The command above will automatically find the UUID of the most recently started simulator and navigate to the Applications Data directory. From there, you can `cd` into the app's data directory by looking for the app's name in the `Documents` folder of each application directory.
 
-## Using Xcode (Jailbroken and Non-Jailbroken Devices – Debug Builds Only)
+## Using Xcode (Jailbroken and Non-Jailbroken Devices - Debug Builds Only)
 
 You can also use Xcode to download the app container directly from a connected device. This method only works for debug builds of the app.
 

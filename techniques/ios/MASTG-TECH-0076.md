@@ -7,7 +7,7 @@ In this section, we will manually examine an iOS application's binary code and p
 
 There are no hard-wired rules for performing static analysis, but there are a few rules of thumb that can be used to have a systematic approach to manual analysis:
 
-- Understand the working of the application under evaluation – the objective of the application and how it behaves in case of wrong input.
+- Understand the working of the application under evaluation - the objective of the application and how it behaves in case of wrong input.
 - Explore the various strings present in the application binary. This can be very helpful, for example, for spotting interesting functionality and potential error-handling logic in the application.
 - Look for functions and classes having names relevant to our goal.
 - Lastly, find the various entry points into the application and follow along from there to explore the application.
