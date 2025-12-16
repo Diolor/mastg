@@ -8,7 +8,7 @@ test: MASTG-TEST-02te // TODO allocate real ID
 
 ### Sample
 
-The code snippet below shows a sample that uses a WebView to load sensitive data into the cache and then performs a cleanup with `WebStorage` api.
+The code snippet below shows a sample that uses a WebView to load sensitive data into the cache and then performs a cleanup with `WebStorage` API.
 
 {{ MainActivityWebView.kt # MastgTestWebView.kt # AndroidManifest.xml }}
 
@@ -25,7 +25,7 @@ The code snippet below shows a sample that uses a WebView to load sensitive data
 
 ### Observation
 
-The output shows all instances of `deleteAllData()` of `WebStorage` called at runtime. A backtrace is also provided to help identify the location in the code.
+The output shows all instances of `deleteAllData()` of `WebStorage` called at runtime.
 
 {{ output.json }}
 

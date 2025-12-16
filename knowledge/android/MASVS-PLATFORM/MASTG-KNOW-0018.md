@@ -241,7 +241,7 @@ Clearing methods can be generic or granular and vary depending on the storage ar
 
 This example in Kotlin from the [open source Firefox Focus](https://github.com/mozilla-mobile/focus-android/blob/v8.17.1/app/src/main/java/org/mozilla/focus/webview/SystemWebView.kt#L220 "Firefox Focus for Android") app shows different cleanup steps:
 
-```Java
+```kotlin
 override fun cleanup() {
     clearFormData() // Removes the autocomplete popup from the currently focused form field, if present. Note that this only affects the display of the autocomplete popup. It does not remove any saved form data from this WebView's store. To do that, use WebViewDatabase#clearFormData.
     clearHistory()
@@ -265,7 +265,7 @@ override fun cleanup() {
 
 The function finishes with some extra _manual_ file deletion in `deleteContentFromKnownLocations` which calls functions from [`FileUtils`](https://github.com/mozilla-mobile/focus-android/blob/v8.17.1/app/src/main/java/org/mozilla/focus/utils/FileUtils.kt#L24-L44). These functions use the [`java.io.File.deleteRecursively`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/java.io.-file/delete-recursively.html) method to delete files from the specified directories recursively.
 
-```Java
+```kt
 private fun deleteContent(directory: File, doNotEraseWhitelist: Set<String> = emptySet()): Boolean {
     val filesToDelete = directory.listFiles()?.filter { !doNotEraseWhitelist.contains(it.name) } ?: return false
     return filesToDelete.all { it.deleteRecursively() }
