@@ -10,7 +10,7 @@ knowledge: [MASTG-KNOW-0018]
 
 WebViews in Android allow applications to render web content, but they can introduce significant security risks if not properly managed.
 
-Whenever possible, follow the guidance in @MASTG-BEST-0012. 
+Whenever possible, follow the guidance in @MASTG-BEST-0012.
 
 Additionally, load only static WebViews packaged within the app bundle, and do not load resources or link (redirect) to external domains. This approach ensures that the displayed content cannot be tampered with remotely.
 
