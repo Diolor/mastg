@@ -46,8 +46,3 @@ fun isOutsideControl(url: String): Boolean {
     return trustedDomains.none { url.startsWith(it) }
 }
 ```
-
-### References
-
-- [Android WebView Security Best Practices](https://developer.android.com/reference/android/webkit/WebView#security)
-- [Google Safe Browsing Service](https://developer.android.com/develop/ui/views/layout/webapps/managing-webview)

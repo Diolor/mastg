@@ -1,31 +1,23 @@
 ---
 platform: android
-title: Native code Exposed Through WebViews
+title: Native Code Exposed Through WebViews
 id: MASTG-TEST-02te
 type: [static]
 weakness: MASWE-0069
-best-practices: [MASTG-BEST-0011, MASTG-BEST-0012, MASTG-BEST-0013, MASTG-BEST-00be] // TODO change best practice before merge
+best-practices: [MASTG-BEST-0011, MASTG-BEST-0012, MASTG-BEST-0013, MASTG-BEST-00be] // TODO
 profiles: [L1, L2]
+knowledge: [MASTG-KNOW-0018]
 ---
 
 ## Overview
 
-Android apps that use WebViews may also include WebView–Native bridges. These bridges can be added via the `addJavascriptInterface` method in the `WebView` class. They enable two-way communication: native code can pass data to the WebView, and JavaScript in the WebView can call into native code. Any website loaded inside the WebView, including those outside the organization's control, can access these bridges (if configured) whenever JavaScript is enabled with `setJavaScriptEnabled(true)`.
+This test verifies Android apps that use WebViews with WebView-Native bridges do not expose native code to websites loaded inside the WebView.
 
-The weakness could become a vulnerability if the WebView allows unencrypted (non-TLS) traffic (i.e., HTTPS) in combination with an XSS attack. Please refer to @MASTG-TEST-0235 to evaluate cleartext traffic.
-
-> Note:
-> Applications targeting API level 16 or earlier are particularly at risk of attack because this method can be used to allow JavaScript to control the host application.
-
-**Example Attack Scenario:**
-
-1. An attacker exploits an XSS vulnerability in a website loaded in the WebView.
-2. The attacker uses the XSS vulnerability to execute JavaScript code that calls methods exposed by the `addJavascriptInterface` method.
-3. The attacker can then read (sensitive) data or perform actions on behalf of the user, depending on the methods exposed by the interface.
+These bridges can be added via the [`addJavascriptInterface`](https://developer.android.com/reference/kotlin/android/webkit/WebView#addjavascriptinterface) method in the `WebView` class. Their functionality requires that JavaScript is enabled on the WebView with [`WebSettings.setJavaScriptEnabled(true)`](https://developer.android.com/reference/android/webkit/WebSettings#setJavaScriptEnabled(boolean)). On API level 17 and above, the `@JavascriptInterface` annotation is required to expose methods to JavaScript.
 
 ## Steps
 
-1. Use a tool like @MASTG-TOOL-0110 to search for references to:
+1. Use @MASTG-TECH-0014 to search for references of:
 
 - the `setJavaScriptEnabled` method
 - the `addJavascriptInterface` method
@@ -35,7 +27,7 @@ The weakness could become a vulnerability if the WebView allows unencrypted (non
 
 The output should contain a list of WebView instances, including the following methods and their arguments:
 
-- `setJavaScriptEnabled`
+- `setJavaScriptEnabled` and if it's enabled or not
 - `addJavascriptInterface` and their associated classes
 - `@JavascriptInterface` and their associated methods
 
@@ -46,10 +38,6 @@ The output should contain a list of WebView instances, including the following m
 The test fails automatically if all the following are true:
 
 - The application is targeting API level 16 or lower.
-- `addJavascriptInterface` is used at least once.
-
-The test also fails automatically if all the following are true:
-
 - `setJavaScriptEnabled` is `true`.
 - `addJavascriptInterface` is used at least once.
 

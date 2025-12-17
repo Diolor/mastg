@@ -1,6 +1,6 @@
 ---
 platform: android
-title: Native code Exposed Through WebViews
+title: Native Code Exposed Through WebViews
 id: MASTG-DEMO-00de
 code: [kotlin]
 test: MASTG-TEST-02te
@@ -8,7 +8,7 @@ test: MASTG-TEST-02te
 
 ### Sample
 
-The following demo demonstrates a `WebView` component that exposes native functionality to JavaScript through the `addJavascriptInterface()` method that both compromises the app's integrity and confidentiality.
+The following demo demonstrates a `WebView` component that exposes native functionality to JavaScript via the `addJavascriptInterface()` method, compromising the app's integrity and confidentiality.
 
 {{ AndroidManifest.xml }}
 

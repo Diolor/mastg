@@ -188,13 +188,22 @@ The WebView can access any data accessible via content providers (if the app has
 
 Data from other apps accessible via content providers (if the app has any and they are exported) can also be accessed.
 
-## Java Objects Exposed Through WebViews
+## WebView-Native bridges
 
-Android offers a way for JavaScript execution in a WebView to call and use native functions of an Android app (annotated with `@JavascriptInterface`) by using the [`addJavascriptInterface`](https://developer.android.com/reference/android/webkit/WebView.html#addJavascriptInterface%28java.lang.Object,%20java.lang.String%29 "Method addJavascriptInterface()") method. This is known as a _WebView JavaScript bridge_ or _native bridge_.
+Android allows websites loaded inside a WebView to call native Android code via JavaScript. This mechanism is commonly referred to as a "WebView JavaScript bridge" or "native bridge".
 
-Please note that **when you use `addJavascriptInterface`, you're explicitly granting access to the registered JavaScript Interface object to all pages loaded within that WebView**. This implies that, if the user navigates outside your app or domain, all other external pages will also have access to those JavaScript Interface objects which might present a potential security risk if any sensitive data is being exposed though those interfaces.
+When JavaScript is enabled with `setJavaScriptEnabled(true)` and the app registers a Java or Kotlin object with [`addJavascriptInterface`](https://developer.android.com/reference/kotlin/android/webkit/WebView#addjavascriptinterface), that object becomes a JavaScript Interface Object (bridge) and is exposed to all JavaScript running within the WebView. These methods could return data to the WebView or perform specific functionality within the app.
 
-> Warning: Take extreme care with apps targeting Android versions below Android 4.2 (API level 17) as they are [vulnerable to a flaw](https://labs.withsecure.com/publications/webview-addjavascriptinterface-remote-code-execution "WebView addJavascriptInterface Remote Code Execution") in the implementation of `addJavascriptInterface`: an attack that is abusing reflection, which leads to remote code execution when malicious JavaScript is injected into a WebView. This was due to all Java Object methods being accessible by default (instead of only those annotated).
+Any website loaded in the WebView, whether statically within the app or dynamically (both inside or outside the organization's control or trust boundaries), can access the registered JavaScript interface. This applies particularly to JavaScript scripts loaded on those websites. So even when the user navigates within trusted domains, all scripts executing on those pages inherit access to the bridge.
+
+If the exposed interface provides access to sensitive data or privileged functionality, it can introduce serious security risks. Attackers with direct control of those websites (or scripts) or indirect (e.g. via [Cross-Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/)) can access the WebView and thus read such data or execute arbitrary code on the device.
+
+Starting with Android 4.2 (API level 17), the [`@JavascriptInterface`](https://developer.android.com/reference/kotlin/android/webkit/JavascriptInterface) annotation was introduced to mark which methods are exposed to JavaScript explicitly. Only methods annotated with `@JavascriptInterface` are callable from JavaScript.
+
+!!! Warning
+    Apps targeting Android versions below 4.2 (API level 17) require extreme caution. Due to [a flaw](https://labs.withsecure.com/publications/webview-addjavascriptinterface-remote-code-execution) in the original implementation of `addJavascriptInterface`, all public methods of the exposed object were accessible via JavaScript by default, even if this vulnerability could be exploited through reflection. This was because all Java Object methods are accessible by default.
+
+Visit [Android WebView Security Best Practices](https://developer.android.com/privacy-and-security/risks/insecure-webview-native-bridges#risk-addjavascriptinterface-risks) and [Security checklist](https://developer.android.com/privacy-and-security/security-tips#webview) for more information.
 
 ## WebViews Cleanup
 
