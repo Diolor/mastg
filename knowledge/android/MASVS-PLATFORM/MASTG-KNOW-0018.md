@@ -30,13 +30,7 @@ JavaScript can be injected into web applications via reflected, stored, or DOM-b
 
 On Android versions prior to 4.4, WebViews used the WebKit rendering engine to display web pages. Since Android 4.4, [WebViews have been based on Chromium](https://developer.android.com/about/versions/lollipop#WebView), providing improved performance and compatibility. However, the pages are still stripped down to minimal functions; for example, pages don't have address bars.
 
-Android WebViews can use [`setJavaScriptEnabled`](https://developer.android.com/reference/android/webkit/WebSettings#setJavaScriptEnabled(boolean)) to enable JavaScript execution. This feature is disabled by default, but if enabled, it can be used to execute JavaScript code in the context of the loaded page. This can be dangerous if the WebView is loading untrusted content, as it can lead to XSS attacks. If you need to enable JavaScript, make sure that the content is trusted and that you have implemented proper input validation and output encoding. Otherwise, you can explicitly disable JavaScript:
-
-```kotlin
-webView.settings.apply {
-    javaScriptEnabled = false
-}
-```
+Android WebViews can use [`setJavaScriptEnabled`](https://developer.android.com/reference/android/webkit/WebSettings#setJavaScriptEnabled(boolean)) to enable JavaScript execution. This feature is disabled by default, but if enabled, it can be used to execute JavaScript code in the context of the loaded page. This can be dangerous if the WebView loads untrusted content.
 
 ## WebView Local File Access Settings
 
@@ -211,3 +205,13 @@ As an additional measure, you could use server-side headers such as `no-cache`, 
 > Starting on Android 10 (API level 29) apps are able to detect if a WebView has become [unresponsive](https://developer.android.com/about/versions/10/features?hl=en#webview-hung "WebView hung renderer detection"). If this happens, the OS will automatically call the `onRenderProcessUnresponsive` method.
 
 You can find more security best practices when using WebViews on [Android Developers](https://developer.android.com/training/articles/security-tips?hl=en#WebView "Security Tips - Use WebView").
+
+## Secure Alternatives to WebView
+
+[Trusted Web Activities](https://developer.android.com/develop/ui/views/layout/webapps/trusted-web-activities) or [Custom Tabs](https://developer.chrome.com/docs/android/custom-tabs/overview/) provide a more secure way to display web content, with JavaScript executed in the browser environment. They benefit from:
+
+- Automatic security updates
+- Strong process sandboxing
+- Built-in mitigations against common web vulnerabilities (e.g., Cross-Site Scripting (XSS), Man-in-the-Middle (MITM) attacks)
+
+A trade-off of this approach is that you may lose some control over the user experience or the application's look and feel. However, this is a necessary compromise to ensure the security and integrity of your application.
