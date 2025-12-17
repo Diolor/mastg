@@ -17,11 +17,21 @@ These bridges can be added via the [`addJavascriptInterface`](https://developer.
 
 ## Steps
 
-1. Use @MASTG-TECH-0014 to search for references of:
+1. Use @MASTG-TECH-0013 to reverse engineer the app.
+2. Use @MASTG-TECH-0014 to look for references of:
 
-- the `setJavaScriptEnabled` method
-- the `addJavascriptInterface` method
-- the `@JavascriptInterface` annotation
+   - the `setJavaScriptEnabled` method
+   - the `addJavascriptInterface` method
+
+### Sub-method 1
+
+1. Use @MASTG-TECH-0014 to look for references to the `@JavascriptInterface` annotation.
+
+### Sub-method 2
+
+1. Install and run the app.
+2. Navigate to the WebView you want to analyze.
+3. Use @MASTG-TECH-0033 targeting the `@JavascriptInterface` and log their arguments.
 
 ## Observation
 
