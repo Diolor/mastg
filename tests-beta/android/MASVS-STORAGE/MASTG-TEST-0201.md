@@ -25,4 +25,4 @@ The output should contain a list of files that the app wrote to the external sto
 
 The test case fails if the files found above are not encrypted and leak sensitive data.
 
-To confirm this, you can manually inspect the files using adb shell (@MASTG-TECH-0002) to retrieve them from the device, and reverse engineer the app (@MASTG-TECH-0017) and inspect the code (@MASTG-TECH-0023).
+To confirm this, you can manually inspect the files using adb shell (@MASTG-TECH-0002) to retrieve them from the device, and reverse-engineer the app (@MASTG-TECH-0013) and inspect the code (@MASTG-TECH-0023).
