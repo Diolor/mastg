@@ -1,7 +1,7 @@
 ---
 platform: android
 title: WebViews Not Cleaning Up Sensitive Data
-id: MASTG-TEST-02te
+id: MASTG-TEST-0320
 type: [dynamic]
 weakness: MASWE-0118
 profiles: [L1, L2]

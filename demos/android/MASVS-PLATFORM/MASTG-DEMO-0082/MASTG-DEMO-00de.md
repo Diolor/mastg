@@ -1,9 +1,9 @@
 ---
 platform: android
 title: WebView WebStorage Cleanup
-id: MASTG-DEMO-00de // TODO allocate real ID
+id: MASTG-DEMO-0082
 code: [kotlin]
-test: MASTG-TEST-02te // TODO allocate real ID
+test: MASTG-TEST-0320
 ---
 
 ### Sample
