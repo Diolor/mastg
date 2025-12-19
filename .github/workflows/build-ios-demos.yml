@@ -70,22 +70,9 @@ jobs:
         with:
           repository: cpholguera/mas-app-ios
           path: mas-app-ios
-        
+
       - name: Install dependencies
-        uses: tecolicom/actions-use-homebrew-tools@v1
-        with:
-          tools: ldid
-
-      - name: Set default scheme and iOS deployment target
-        run: |
-          cd mas-app-ios
-          default=$(xcodebuild -list -json | jq -r '.project.targets[0]')
-          echo "DEFAULT_SCHEME=$default" >> "$GITHUB_ENV"
-          echo "Using default scheme: $default"
-
-          DEPLOYMENT_TARGET=14.4
-          echo "Setting iOS Deployment Target to $DEPLOYMENT_TARGET"
-          sed -i '' "s/IPHONEOS_DEPLOYMENT_TARGET = .*;/IPHONEOS_DEPLOYMENT_TARGET = $DEPLOYMENT_TARGET;/g" "MASTestApp.xcodeproj/project.pbxproj"
+        run: ./mas-app-ios/.github/scripts/install-dependencies.sh
 
       - name: Replace files with demo and prepare build
         run: |
@@ -100,30 +87,16 @@ jobs:
           [ -f "$demo/Info.plist" ] && cp -f "$demo/Info.plist" mas-app-ios/MASTestApp/Info.plist && echo "Copied Info.plist for $demo" || echo "No Info.plist found for $demo"
 
       - name: Build the app (unsigned)
-        run: |
-          cd mas-app-ios
-          xcodebuild archive \
-            -project "MASTestApp.xcodeproj" \
-            -scheme "$DEFAULT_SCHEME" \
-            -archivePath "$GITHUB_WORKSPACE/build/MASTestApp.xcarchive" \
-            -configuration Release \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO
+        run: ./mas-app-ios/.github/scripts/build-unsigned.sh
 
       - name: Pseudo sign with entitlements.plist
-        run: |
-          ldid -Smas-app-ios/entitlements.plist "$GITHUB_WORKSPACE/build/MASTestApp.xcarchive/Products/Applications/MASTestApp.app/MASTestApp"
+        run: ./mas-app-ios/.github/scripts/add-entitlements.sh
 
-      - name: Create IPA manually
+      - name: Create IPA
         run: |
-          cd "$GITHUB_WORKSPACE/build/MASTestApp.xcarchive/Products" || exit 1
-          mv Applications Payload
-          zip -r9q MASTestApp.zip Payload
-          mv MASTestApp.zip MASTestApp.ipa
-          mkdir -p "$GITHUB_WORKSPACE/output"
-          mv MASTestApp.ipa "$GITHUB_WORKSPACE/output/$(basename "${{ matrix.demo }}").ipa"
-          echo "IPA_NAME=$(basename "${{ matrix.demo }}").ipa" >> $GITHUB_ENV
+          IPA_NAME="$(basename "${{ matrix.demo }}").ipa"
+          ./mas-app-ios/.github/scripts/create-ipa.sh "$IPA_NAME"
+          echo "IPA_NAME=$IPA_NAME" >> $GITHUB_ENV
 
       - name: Upload IPA
         uses: actions/upload-artifact@v4
