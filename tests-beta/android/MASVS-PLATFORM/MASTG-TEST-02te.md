@@ -1,48 +1,70 @@
 ---
 platform: android
-title: Testing WebViews Cleanup
-id: MASTG-TEST-02te // TODO allocate real ID
-type: [dynamic, manual]
+title: WebViews Not Cleaning Up Sensitive Data
+id: MASTG-TEST-02te
+type: [dynamic]
 weakness: MASWE-0118
 profiles: [L1, L2]
 best-practices: [MASTG-BEST-00be]
+knowledge: [MASTG-KNOW-0018]
 prerequisites:
 - identify-sensitive-data
 ---
 
 ## Overview
 
-This test verifies whether the application cleans up sensitive information used by WebViews. @MASTG-KNOW-0018 describes the storage areas used by WebViews and the challenges of evaluating their cleanup.
+This test verifies whether the app cleans up sensitive data used by WebViews. Apps can enable several specific storage areas in their WebViews and not clean them up properly, leading to sensitive data being stored on the device longer than necessary. For example:
 
-- When `WebSettings.setAppCacheEnabled()` is enabled or [`WebSettings.setCacheMode()`](https://developer.android.com/reference/android/webkit/WebSettings#setCacheMode(int)) is any value other than [`WebSettings.LOAD_NO_CACHE`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#LOAD_NO_CACHE:kotlin.Int), [`WebView.clearCache(includeDiskFiles = true)`](https://developer.android.com/reference/android/webkit/WebView#clearCache(boolean)) should be called.
-- When [`WebSettings.setDomStorageEnabled`](https://developer.android.com/reference/android/webkit/WebSettings#setDomStorageEnabled(boolean)) is enabled, [`WebStorage.deleteAllData()`](https://developer.android.com/reference/android/webkit/WebStorage#deleteAllData()) should be called.
-- When [`WebSettings.setDatabaseEnabled()`](https://developer.android.com/reference/android/webkit/WebSettings#setDatabaseEnabled(boolean)) is enabled, [`WebStorage.deleteAllData()`](https://developer.android.com/reference/android/webkit/WebStorage#deleteAllData()) should be called.
-- When [`CookieManager.setAcceptCookie()`](https://developer.android.com/reference/android/webkit/CookieManager#setAcceptCookie(boolean)) is not explicitly set to `false` (default is set to `true`), [`CookieManager.removeAllCookies(ValueCallback<Boolean> ...)`](https://developer.android.com/reference/android/webkit/CookieManager#removeAllCookies(android.webkit.ValueCallback%3Cjava.lang.Boolean%3E)) should be called.
-
-In all the above cases, if specific storage areas are enabled but cleanup methods are not called, sensitive data may be retained beyond its intended lifetime.
+- Not calling [`WebView.clearCache(includeDiskFiles = true)`](https://developer.android.com/reference/android/webkit/WebView#clearCache(boolean)) when:
+    - `WebSettings.setAppCacheEnabled()` is enabled,
+    - or [`WebSettings.setCacheMode()`](https://developer.android.com/reference/android/webkit/WebSettings#setCacheMode(int)) is any value other than [`WebSettings.LOAD_NO_CACHE`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#LOAD_NO_CACHE:kotlin.Int).
+- Not calling [`WebStorage.deleteAllData()`](https://developer.android.com/reference/android/webkit/WebStorage#deleteAllData()) when:
+    - [`WebSettings.setDomStorageEnabled`](https://developer.android.com/reference/android/webkit/WebSettings#setDomStorageEnabled(boolean)) is enabled.
+- Not calling [`WebStorage.deleteAllData()`](https://developer.android.com/reference/android/webkit/WebStorage#deleteAllData()) when:
+    - [`WebSettings.setDatabaseEnabled()`](https://developer.android.com/reference/android/webkit/WebSettings#setDatabaseEnabled(boolean)) is enabled.
+- Not calling [`CookieManager.removeAllCookies(ValueCallback<Boolean> ...)`](https://developer.android.com/reference/android/webkit/CookieManager#removeAllCookies(android.webkit.ValueCallback%3Cjava.lang.Boolean%3E)) when:
+    - [`CookieManager.setAcceptCookie()`](https://developer.android.com/reference/android/webkit/CookieManager#setAcceptCookie(boolean)) is not explicitly set to `false` (default is set to `true`).
 
 !!! Warning
-    This test scopes out Storage areas such as [**SQLite Wasm**](https://developer.chrome.com/blog/sqlite-wasm-in-the-browser-backed-by-the-origin-private-file-system) and other APIs used by Origin Private File System (OPFS).
+    This test scopes out storage areas such as [**SQLite Wasm**](https://developer.chrome.com/blog/sqlite-wasm-in-the-browser-backed-by-the-origin-private-file-system) and other APIs used by Origin Private File System (OPFS).
+
+This test uses dynamic analysis to monitor the relevant API calls and file system operations. Regardless of whether the app uses these APIs directly, WebViews may use them internally when rendering content (e.g., JavaScript code using `localStorage`). So tracing calls to APIs such as `open`, `openat`, `opendir`, `unlinkat`, etc., can help identify file operations in the WebView storage directory.
 
 ## Steps
 
-1. Reverse engineer the app and use @MASTG-TECH-0014 to inspect WebView storage enablement APIs for the target WebView. Alternatively, install and run the app with @MASTG-TECH-0033 to target WebView storage enablement APIs and navigate to the WebView you want to evaluate.
-2. Optionally, use @MASTG-TECH-0142 to manually inspect the storage areas used by the WebView and their contents. Manually enumerate if sensitive data is present. Note that the webview could store sensitive data **after** the observation moment.
-3. Use @MASTG-TECH-0033 to target WebView cleanup APIs and save the output.
+1. Install the app on a device (@MASTG-TECH-0056).
+2. Use @MASTG-TECH-0033 to target WebView APIs for storage and cleanup.
+3. Open the app.
+4. Use the app extensively to ensure that all relevant WebViews are covered and that sensitive data is loaded into them. Ensure you keep a list of the sensitive data you expect to be cleaned up.
+5. Close the app.
+6. Use @MASTG-TECH-0002 to pull the contents of the `/data/data/<app_package>/app_webview/` directory or simply search for the sensitive data used in the WebView within that directory.
 
 ## Observation
 
 The output should list the locations in the app where:
 
 1. The WebView enables particular storage areas.
-2. Cleanup APIs are used during the current execution, or the lack of them.
-3. Optionally, the information on whether the WebView actually stores sensitive data.
+2. Cleanup APIs used during the current execution, or the lack of them.
+3. File system operations in the `/data/data/<app_package>/app_webview/` directory during app execution.
+4. The list of sensitive data expected to be cleaned up.
+5. The result of searching the contents of the `/data/data/<app_package>/app_webview/` directory for the sensitive data used in the WebView after closing the app.
 
 ## Evaluation
 
-The test case passes if all Storage APIs are configured to deny storage.
-The test case also passes if the Storage APIs are enabled and their **relevant** cleanup APIs are called.
-The test case fails if Storage APIs are enabled and their **relevant** cleanup APIs are **not** called.
+The test case fails if the app still has sensitive data on the `/data/data/<app_package>/app_webview/` directory after the app is closed. This could be due to the app not calling the relevant cleanup APIs after using the WebView.
+
+The test passes if all sensitive data used by the WebView is properly cleaned up using the relevant APIs, and no sensitive data remains in the `/data/data/<app_package>/app_webview/` directory after closing the app.
 
 !!! note
-    The optional observation number 3 can be used to determine whether the WebView stores sensitive data and reduces false negatives.
+    It can be challenging to determine whether the right cleanup APIs were called for the enabled storage areas. @MASTG-KNOW-0018 describes the storage areas used by WebViews and the challenges of evaluating their cleanup.
+
+**Additional Guidance**:
+
+If you need more introspection during runtime, you can rerun the test with additional tracing of file system operations in the WebView storage directory.
+
+For example, you can use @MASTG-TECH-0033 to monitor file system operations in the `/data/data/<app_package>/app_webview/` directory. Regardless of whether the app uses these APIs directly, WebViews may use them internally when rendering content (e.g., JavaScript code using `localStorage`). So tracing calls to APIs such as `open`, `openat`, `opendir`, `unlinkat`, etc., can help identify file operations in the WebView storage directory.
+
+In addition to tracing the method calls, you can also monitor all file operations:
+
+- use @MASTG-TECH-0027 to monitor file operations in that directory, e.g., with `lsof -p <app_pid> | grep /app_webview/`.
+- or use @MASTG-TECH-0032, e.g. with `strace -p <app_pid>`, to monitor file operations in that directory.
