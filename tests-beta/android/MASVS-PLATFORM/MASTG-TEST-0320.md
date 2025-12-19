@@ -5,7 +5,7 @@ id: MASTG-TEST-0320
 type: [dynamic]
 weakness: MASWE-0118
 profiles: [L1, L2]
-best-practices: [MASTG-BEST-00be]
+best-practices: [MASTG-BEST-0028]
 knowledge: [MASTG-KNOW-0018]
 prerequisites:
 - identify-sensitive-data
