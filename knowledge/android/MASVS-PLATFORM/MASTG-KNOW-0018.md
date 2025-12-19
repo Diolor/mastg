@@ -206,7 +206,7 @@ Please note that **when you use `addJavascriptInterface`, you're explicitly gran
 
 Android WebViews cache data when the server responds with specific `Cache-Control` headers that instruct the browser to cache the content. This cache is saved in the device's disk and/or RAM.
 
-### Sensitive information storage areas
+### Sensitive Information Storage Areas
 
 Sensitive information could be found or saved in several areas of a website, including, but not limited to:
 
