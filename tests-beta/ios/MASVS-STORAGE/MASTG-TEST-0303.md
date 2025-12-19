@@ -21,7 +21,7 @@ This test checks whether the app writes sensitive data unencrypted to storage lo
       - `FileManager.default.urls(for:in:)` with `documentDirectory`
       - Direct path manipulation under `.../Documents` for write operations (`Data.write(to:)`, `String.write(to:)`, `NSFileHandle`, `NSOutputStream`)
 
-2. Check the app's `Info.plist` (@MASTG-TECH-0058) for the `UIFileSharingEnabled` and `LSSupportsOpeningDocumentsInPlace` flags.
+2. Use @MASTG-TECH-0058 to check the app's `Info.plist` for the `UIFileSharingEnabled` and `LSSupportsOpeningDocumentsInPlace` flags.
 
 ## Observation
 
