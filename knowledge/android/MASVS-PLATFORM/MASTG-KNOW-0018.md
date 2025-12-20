@@ -61,7 +61,7 @@ The WebView can access any file that the app has permission to access via `file:
         - entire media folders (including data from other apps) if the app has the `READ_MEDIA_IMAGES` or similar permissions.
         - the entire external storage if the app has the `MANAGE_EXTERNAL_STORAGE` permission.
 
-## `setAllowFileAccess`
+### `setAllowFileAccess`
 
 [`setAllowFileAccess`](https://developer.android.com/reference/android/webkit/WebSettings.html#setAllowFileAccess%28boolean%29 "Method setAllowFileAccess()") enables the WebView to load local files using the `file://` scheme. In this example, the WebView is configured to allow file access and then loads an HTML file from the external storage (sdcard).
 
@@ -72,7 +72,7 @@ webView.settings.apply {
 webView.loadUrl("file:///sdcard/index.html");
 ```
 
-## `setAllowFileAccessFromFileURLs`
+### `setAllowFileAccessFromFileURLs`
 
 [`setAllowFileAccessFromFileURLs`](https://developer.android.com/reference/android/webkit/WebSettings.html#setAllowFileAccessFromFileURLs%28boolean%29 "Method setAllowFileAccessFromFileURLs()") allows the local file (loaded via file://) to access additional local resources from its HTML or JavaScript.
 
@@ -109,7 +109,7 @@ The loaded HTML file contains an image that is loaded via a `file://` URL:
 </html>
 ```
 
-## `setAllowUniversalAccessFromFileURLs`
+### `setAllowUniversalAccessFromFileURLs`
 
 [`setAllowUniversalAccessFromFileURLs`](https://developer.android.com/reference/android/webkit/WebSettings.html#setAllowUniversalAccessFromFileURLs%28boolean%29 "Method setAllowUniversalAccessFromFileURLs()") allows JavaScript running in a local file (loaded via `file://`) to bypass the same-origin policy and access resources from any origin.
 
@@ -202,40 +202,45 @@ Please note that **when you use `addJavascriptInterface`, you're explicitly gran
 
 > Warning: Take extreme care with apps targeting Android versions below Android 4.2 (API level 17) as they are [vulnerable to a flaw](https://labs.withsecure.com/publications/webview-addjavascriptinterface-remote-code-execution "WebView addJavascriptInterface Remote Code Execution") in the implementation of `addJavascriptInterface`: an attack that is abusing reflection, which leads to remote code execution when malicious JavaScript is injected into a WebView. This was due to all Java Object methods being accessible by default (instead of only those annotated).
 
-## WebViews Cleanup
+## WebView Storage
 
-Android WebViews cache data when the server responds with specific `Cache-Control` headers that instruct the browser to cache the content. This cache is saved in the device's disk and/or RAM.
+Android WebView embeds a Chromium based browser engine. As a result, most web related data is stored inside the Chromium profile directory located at:
 
-### Sensitive Information Storage Areas
+`/data/data/<app_package>/app_webview/`
 
-Sensitive information could be found or saved in several areas of a website, including, but not limited to:
+Android WebView can persist several categories of data for each origin.
 
-- **Cached files**
-- **DOM storage** (local and session storage)
-- **WebSQL** (deprecated and removed in Chrome)
-- **IndexedDB**
-- **Cookies** (i.e., persistent, session, secure)
-- Other files stored locally backed by the **Origin Private File System (OPFS)**, such as the [**SQLite Wasm**](https://developer.chrome.com/blog/sqlite-wasm-in-the-browser-backed-by-the-origin-private-file-system) database
+- **Cached network resources** created when a server sends cache permissive headers such as Cache Control or Expires. These resources are stored in memory and on disk inside the [Chromium cache](https://developer.chrome.com/docs/devtools/storage/cache).
+- **DOM storage** such as [LocalStorage](https://developer.chrome.com/docs/devtools/storage/localstorage) and [SessionStorage](https://developer.chrome.com/docs/devtools/storage/sessionstorage)
+- [**WebSQL**](https://developer.chrome.com/docs/devtools/storage/websql), removed in modern WebView versions
+- [**IndexedDB**](https://developer.chrome.com/docs/devtools/storage/indexeddb)
+- [**Cookies**](https://developer.chrome.com/docs/devtools/application/cookies) including session and persistent cookies
+- **Files backed by the Origin Private File System (OPFS)** including the [**SQLite Wasm**](https://developer.chrome.com/blog/sqlite-wasm-in-the-browser-backed-by-the-origin-private-file-system) database
 
-An indication that an app might be initializing the WebView in a way to allow storing certain information by using [`WebSettings.setCacheMode`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#setCacheMode(kotlin.Int)), `WebSettings.setAppCacheEnabled()` (deprecated), [`WebSettings.setDomStorageEnabled`](https://developer.android.com/reference/android/webkit/WebSettings#setDomStorageEnabled(boolean)), or [`WebSettings.setDatabaseEnabled`](https://developer.android.com/reference/android/webkit/WebSettings#setDatabaseEnabled(boolean)) from [`android.webkit.WebSettings`](https://developer.android.com/reference/android/webkit/WebSettings "WebSettings"). Cache is enabled by default, while DOM Storage and Database Storage APIs are disabled by default, but apps can explicitly set them to "true". Another indication is that [`CookieManager.setAcceptCookie()`](https://developer.android.com/reference/android/webkit/CookieManager#setAcceptCookie(boolean)) is not explicitly set to `false` as the default is set to `true`.
+OPFS and SQLite Wasm are internal to the Chromium storage layer. Their contents do not appear as ordinary files in the app sandbox.
 
-!!! note
-    The `WebSettings.setAppCacheEnabled()` method was removed in Android 13 (API level 33) in favor of [`WebSettings.setCacheMode()`](https://developer.android.com/reference/android/webkit/WebSettings#setCacheMode(int)).
+### Configuration and Defaults
 
-!!! note
-    WebSQL was deprecated in Android version 15 (API level 35), including related methods such as [`WebSettings.setDatabaseEnabled()`](https://developer.android.com/reference/android/webkit/WebSettings#setDatabaseEnabled(boolean)). To learn more about the World Wide Web Consortium (W3C) recommendations, visit the [deprecation note](https://developer.android.com/about/versions/15/deprecations#websql-webview)
+Storage behavior can be influenced by calls on `android.webkit.WebSettings` such as:
 
-### Clearing methods
+- [`WebSettings.setCacheMode`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#setCacheMode(kotlin.Int))
+- [`WebSettings.setDomStorageEnabled`](https://developer.android.com/reference/android/webkit/WebSettings#setDomStorageEnabled(boolean))
+- [`WebSettings.setDatabaseEnabled`](https://developer.android.com/reference/android/webkit/WebSettings#setDatabaseEnabled(boolean)) [deprecated with WebSQL in Android version 15 (API level 35)](https://developer.android.com/about/versions/15/deprecations#websql-webview)
+- `WebSettings.setAppCacheEnabled` [deprecated and removed in Android 13 (API level 33)](https://developer.android.com/sdk/api_diff/33/changes/android.webkit.WebSettings#removed-methods-setAppCacheEnabled(boolean))
 
-Clearing methods can be generic or granular and vary depending on the storage area that should be purged or the application's functionality.
+Network cache is enabled by default and obeys the HTTP cache headers sent by the server. DOM storage is enabled by default on all supported WebView versions. Database related flags are deprecated and no longer control IndexedDB or other modern storage. Cookies are accepted by default unless an app disables them through `CookieManager`.
 
-- **Cached files**: [`WebView.clearCache(includeDiskFiles = true)`](https://developer.android.com/reference/android/webkit/WebView#clearCache(boolean)) can be called to delete both the RAM cache and files stored locally (i.e., images, JS, CSS). This is a per-application operation that clears the cache for all WebViews.
-- **WebStorage APIs**: [`WebStorage.deleteAllData()`](https://developer.android.com/reference/android/webkit/WebStorage#deleteAllData()) clears DOM storage (local and session storage), Web SQL Database, and HTML5 Web Storage APIs, including IndexedDB.
-- **Cookies**: [`CookieManager.removeAllCookies(ValueCallback<Boolean> ...)`](https://developer.android.com/reference/android/webkit/CookieManager#removeAllCookies(android.webkit.ValueCallback%3Cjava.lang.Boolean%3E)) clears all cookies.
-- **OPFS**: [`java.io.File.deleteRecursively`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/java.io.-file/delete-recursively.html) deletes files recursively.
-- **SQLite Wasm**:
-    - [`SQLiteDatabase.delete()`](https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#delete(java.lang.String,%20java.lang.String,%20java.lang.String[])) deletes rows
-    - [`SQLiteDatabase.deleteDatabase()`](https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#deleteDatabase(java.io.File)) deletes the whole database.
+### Clearing Stored Data
+
+Android does not provide a dedicated API to delete the Chromium profile under `app_webview`. Apps must not attempt to delete this directory directly. The only supported way to remove it is to clear the app's data, either through system settings or by calling `ActivityManager.clearApplicationUserData()`. However, this might not be desirable if the app wants to retain other user data.
+
+A more adequate approach is to clear individual storage subsystems used by WebView. These include:
+
+- **Cached Resources**: [`WebView.clearCache`](https://developer.android.com/reference/android/webkit/WebView#clearCache(boolean))(true) clears the memory and disk HTTP cache. It does not remove cookies, DOM storage, IndexedDB, OPFS, or other persistent data.
+- **WebStorage APIs**: [`WebStorage.deleteAllData`](https://developer.android.com/reference/android/webkit/WebStorage#deleteAllData()) clears LocalStorage and legacy WebSQL. It does not clear IndexedDB or OPFS.
+- **Cookies**: [`CookieManager.removeAllCookies`](https://developer.android.com/reference/android/webkit/CookieManager#removeAllCookies(android.webkit.ValueCallback%3Cjava.lang.Boolean%3E)) removes all cookies for the app.
+- **IndexedDB and OPFS**: IndexedDB and OPFS are managed internally by Chromium and are not covered by the WebStorage API. They cannot be deleted with Java file APIs such as [`java.io.File.deleteRecursively`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/java.io.-file/delete-recursively.html). Clearing requires deleting the entire WebView profile.
+- **SQLite Wasm**: SQLite Wasm databases live inside OPFS. They are not Android SQLite databases and cannot be controlled using Android APIs such as [`SQLiteDatabase.delete`](https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#delete(java.lang.String,%20java.lang.String,%20java.lang.String[])) or [`SQLiteDatabase.deleteDatabase`](https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#deleteDatabase(java.io.File)). Clearing requires deleting the entire WebView profile.
 
 **Example:**
 
