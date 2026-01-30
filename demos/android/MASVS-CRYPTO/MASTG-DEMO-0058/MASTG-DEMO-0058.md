@@ -35,11 +35,11 @@ When executing the code, you will see the following results for each of the thre
 These are the relevant methods we are hooking to detect the use of ECB and whether randomized encryption is disabled:
 
 - Setting block modes:
-    - [`KeyGenParameterSpec.Builder#setBlockModes(...)`](https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec.Builder#setBlockModes(java.lang.String[]))
-    - [`KeyProtection.Builder#setBlockModes(...)`](https://developer.android.com/reference/android/security/keystore/KeyProtection.Builder#setBlockModes(java.lang.String[])).
+    - [`KeyGenParameterSpec.Builder#setBlockModes(...)`](https://developer.android.com/reference/kotlin/android/security/keystore/KeyGenParameterSpec.Builder#setblockmodes)
+    - [`KeyProtection.Builder#setBlockModes(...)`](https://developer.android.com/reference/kotlin/android/security/keystore/KeyProtection.Builder#setblockmodes).
 - Enabling/disabling randomized encryption:
-    - [`KeyGenParameterSpec.Builder#setRandomizedEncryptionRequired`](https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec.Builder#setRandomizedEncryptionRequired(boolean))
-    - [`KeyProtection.Builder#setRandomizedEncryptionRequired`](https://developer.android.com/reference/android/security/keystore/KeyProtection.Builder#setRandomizedEncryptionRequired(boolean))
+    - [`KeyGenParameterSpec.Builder#setRandomizedEncryptionRequired`](https://developer.android.com/reference/kotlin/android/security/keystore/KeyGenParameterSpec.Builder#setrandomizedencryptionrequired)
+    - [`KeyProtection.Builder#setRandomizedEncryptionRequired`](https://developer.android.com/reference/kotlin/android/security/keystore/KeyProtection.Builder#setrandomizedencryptionrequired)
 
 {{ hooks.json # run.sh }}
 

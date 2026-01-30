@@ -41,7 +41,7 @@ The rule has detected several instances. For each one, the output shows:
 
 The test fails because the app doesn't use non-caching input types for some sensitive fields. Only the first input field (password) is configured correctly. The other two fields (passphrase and PIN) are set to caching input types.
 
-> See the Android [InputType documentation](https://developer.android.com/reference/android/text/InputType) for details about what each numeric value represents.
+> See the Android [InputType documentation](https://developer.android.com/reference/kotlin/android/text/InputType) for details about what each numeric value represents.
 
 **(PASS)** Object `showPopup_u24lambda_u241` is set as `129`:
 

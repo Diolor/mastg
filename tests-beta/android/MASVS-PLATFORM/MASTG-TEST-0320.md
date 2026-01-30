@@ -15,15 +15,15 @@ prerequisites:
 
 This test verifies whether the app cleans up sensitive data used by WebViews. Apps can enable several specific storage areas in their WebViews and not clean them up properly, leading to sensitive data being stored on the device longer than necessary. For example:
 
-- Not calling [`WebView.clearCache(includeDiskFiles = true)`](https://developer.android.com/reference/android/webkit/WebView#clearCache(boolean)) when:
+- Not calling [`WebView.clearCache(includeDiskFiles = true)`](https://developer.android.com/reference/kotlin/android/webkit/WebView#clearcache) when:
     - `WebSettings.setAppCacheEnabled()` is enabled,
-    - or [`WebSettings.setCacheMode()`](https://developer.android.com/reference/android/webkit/WebSettings#setCacheMode(int)) is any value other than [`WebSettings.LOAD_NO_CACHE`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#LOAD_NO_CACHE:kotlin.Int).
-- Not calling [`WebStorage.deleteAllData()`](https://developer.android.com/reference/android/webkit/WebStorage#deleteAllData()) when:
-    - [`WebSettings.setDomStorageEnabled`](https://developer.android.com/reference/android/webkit/WebSettings#setDomStorageEnabled(boolean)) is enabled.
-- Not calling [`WebStorage.deleteAllData()`](https://developer.android.com/reference/android/webkit/WebStorage#deleteAllData()) when:
-    - [`WebSettings.setDatabaseEnabled()`](https://developer.android.com/reference/android/webkit/WebSettings#setDatabaseEnabled(boolean)) is enabled.
-- Not calling [`CookieManager.removeAllCookies(ValueCallback<Boolean> ...)`](https://developer.android.com/reference/android/webkit/CookieManager#removeAllCookies(android.webkit.ValueCallback%3Cjava.lang.Boolean%3E)) when:
-    - [`CookieManager.setAcceptCookie()`](https://developer.android.com/reference/android/webkit/CookieManager#setAcceptCookie(boolean)) is not explicitly set to `false` (default is set to `true`).
+    - or [`WebSettings.setCacheMode()`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#setcachemode) is any value other than [`WebSettings.LOAD_NO_CACHE`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#load_no_cache).
+- Not calling [`WebStorage.deleteAllData()`](https://developer.android.com/reference/kotlin/android/webkit/WebStorage#deletealldata) when:
+    - [`WebSettings.setDomStorageEnabled`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#setdomstorageenabled) is enabled.
+- Not calling [`WebStorage.deleteAllData()`](https://developer.android.com/reference/kotlin/android/webkit/WebStorage#deletealldata) when:
+    - [`WebSettings.setDatabaseEnabled()`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#setdatabaseenabled) is enabled.
+- Not calling [`CookieManager.removeAllCookies(ValueCallback<Boolean> ...)`](https://developer.android.com/reference/kotlin/android/webkit/CookieManager#removeallcookies) when:
+    - [`CookieManager.setAcceptCookie()`](https://developer.android.com/reference/kotlin/android/webkit/CookieManager#setacceptcookie) is not explicitly set to `false` (default is set to `true`).
 
 This test uses dynamic analysis to monitor the relevant API calls and file system operations. Regardless of whether the app uses these APIs directly, WebViews may use them internally when rendering content (e.g., JavaScript code using `localStorage`). So tracing calls to APIs such as `open`, `openat`, `opendir`, `unlinkat`, etc., can help identify file operations in the WebView storage directory.
 

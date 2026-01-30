@@ -30,7 +30,7 @@ JavaScript can be injected into web applications via reflected, stored, or DOM-b
 
 On Android versions prior to 4.4, WebViews used the WebKit rendering engine to display web pages. Since Android 4.4, [WebViews have been based on Chromium](https://developer.android.com/about/versions/lollipop#WebView), providing improved performance and compatibility. However, the pages are still stripped down to minimal functions; for example, pages don't have address bars.
 
-Android WebViews can use [`setJavaScriptEnabled`](https://developer.android.com/reference/android/webkit/WebSettings#setJavaScriptEnabled(boolean)) to enable JavaScript execution. This feature is disabled by default, but if enabled, it can be used to execute JavaScript code in the context of the loaded page. This can be dangerous if the WebView is loading untrusted content, as it can lead to XSS attacks. If you need to enable JavaScript, make sure that the content is trusted and that you have implemented proper input validation and output encoding. Otherwise, you can explicitly disable JavaScript:
+Android WebViews can use [`setJavaScriptEnabled`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#setjavascriptenabled) to enable JavaScript execution. This feature is disabled by default, but if enabled, it can be used to execute JavaScript code in the context of the loaded page. This can be dangerous if the WebView is loading untrusted content, as it can lead to XSS attacks. If you need to enable JavaScript, make sure that the content is trusted and that you have implemented proper input validation and output encoding. Otherwise, you can explicitly disable JavaScript:
 
 ```kotlin
 webView.settings.apply {
@@ -63,7 +63,7 @@ The WebView can access any file that the app has permission to access via `file:
 
 ### `setAllowFileAccess`
 
-[`setAllowFileAccess`](https://developer.android.com/reference/android/webkit/WebSettings.html#setAllowFileAccess%28boolean%29 "Method setAllowFileAccess()") enables the WebView to load local files using the `file://` scheme. In this example, the WebView is configured to allow file access and then loads an HTML file from the external storage (sdcard).
+[`setAllowFileAccess`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#setallowfileaccess "Method setAllowFileAccess()") enables the WebView to load local files using the `file://` scheme. In this example, the WebView is configured to allow file access and then loads an HTML file from the external storage (sdcard).
 
 ```java
 webView.settings.apply {
@@ -74,9 +74,9 @@ webView.loadUrl("file:///sdcard/index.html");
 
 ### `setAllowFileAccessFromFileURLs`
 
-[`setAllowFileAccessFromFileURLs`](https://developer.android.com/reference/android/webkit/WebSettings.html#setAllowFileAccessFromFileURLs%28boolean%29 "Method setAllowFileAccessFromFileURLs()") allows the local file (loaded via file://) to access additional local resources from its HTML or JavaScript.
+[`setAllowFileAccessFromFileURLs`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#setallowfileaccessfromfileurls "Method setAllowFileAccessFromFileURLs()") allows the local file (loaded via file://) to access additional local resources from its HTML or JavaScript.
 
-Note that the value of [**this setting is ignored**](https://developer.android.com/reference/android/webkit/WebSettings#setAllowFileAccessFromFileURLs(boolean)) if the value of `allowUniversalAccessFromFileURLs` is `true`.
+Note that the value of [**this setting is ignored**](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#setallowfileaccessfromfileurls) if the value of `allowUniversalAccessFromFileURLs` is `true`.
 
 > [Chromium WebView Docs](https://chromium.googlesource.com/chromium/src/+/HEAD/android_webview/docs/cors-and-webview-api.md#setallowfileaccessfromfileurls): With this relaxed origin rule, URLs starting with `content://` and `file://` can access resources that have the same relaxed origin over `XMLHttpRequest`. For instance, `file://foo` can make an `XMLHttpRequest` to `file://bar`. Developers need to be careful so that a user provided data do not run in `content://` as it will allow the user's code to access arbitrary `content://` URLs those are provided by other applications. It will cause a serious security issue.
 >
@@ -111,7 +111,7 @@ The loaded HTML file contains an image that is loaded via a `file://` URL:
 
 ### `setAllowUniversalAccessFromFileURLs`
 
-[`setAllowUniversalAccessFromFileURLs`](https://developer.android.com/reference/android/webkit/WebSettings.html#setAllowUniversalAccessFromFileURLs%28boolean%29 "Method setAllowUniversalAccessFromFileURLs()") allows JavaScript running in a local file (loaded via `file://`) to bypass the same-origin policy and access resources from any origin.
+[`setAllowUniversalAccessFromFileURLs`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#setallowuniversalaccessfromfileurls "Method setAllowUniversalAccessFromFileURLs()") allows JavaScript running in a local file (loaded via `file://`) to bypass the same-origin policy and access resources from any origin.
 
 > [Chromium WebView Docs](https://chromium.googlesource.com/chromium/src/+/HEAD/android_webview/docs/cors-and-webview-api.md#setallowuniversalaccessfromfileurls): When this API is called with true, URLs starting with `file://` will have a scheme based origin, and can access other scheme based URLs over `XMLHttpRequest`. For instance, `file://foo` can make an `XMLHttpRequest` to `content://bar`, `http://example.com/`, and `https://www.google.com/`. So developers need to manage data running under the `file://` scheme as it allows powerful permissions beyond the public web's CORS policy.
 >
@@ -196,7 +196,7 @@ Data from other apps accessible via content providers (if the app has any and th
 
 ## Java Objects Exposed Through WebViews
 
-Android offers a way for JavaScript execution in a WebView to call and use native functions of an Android app (annotated with `@JavascriptInterface`) by using the [`addJavascriptInterface`](https://developer.android.com/reference/android/webkit/WebView.html#addJavascriptInterface%28java.lang.Object,%20java.lang.String%29 "Method addJavascriptInterface()") method. This is known as a _WebView JavaScript bridge_ or _native bridge_.
+Android offers a way for JavaScript execution in a WebView to call and use native functions of an Android app (annotated with `@JavascriptInterface`) by using the [`addJavascriptInterface`](https://developer.android.com/reference/kotlin/android/webkit/WebView#addjavascriptinterface "Method addJavascriptInterface()") method. This is known as a _WebView JavaScript bridge_ or _native bridge_.
 
 Please note that **when you use `addJavascriptInterface`, you're explicitly granting access to the registered JavaScript Interface object to all pages loaded within that WebView**. This implies that, if the user navigates outside your app or domain, all other external pages will also have access to those JavaScript Interface objects, which might present a potential security risk if any sensitive data is being exposed through those interfaces.
 
@@ -223,9 +223,9 @@ OPFS and SQLite Wasm are internal to the Chromium storage layer. Their contents 
 
 Storage behavior can be influenced by calls on `android.webkit.WebSettings` such as:
 
-- [`WebSettings.setCacheMode`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#setCacheMode(kotlin.Int))
-- [`WebSettings.setDomStorageEnabled`](https://developer.android.com/reference/android/webkit/WebSettings#setDomStorageEnabled(boolean))
-- [`WebSettings.setDatabaseEnabled`](https://developer.android.com/reference/android/webkit/WebSettings#setDatabaseEnabled(boolean)) [deprecated with WebSQL in Android version 15 (API level 35)](https://developer.android.com/about/versions/15/deprecations#websql-webview)
+- [`WebSettings.setCacheMode`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#setcachemode)
+- [`WebSettings.setDomStorageEnabled`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#setdomstorageenabled)
+- [`WebSettings.setDatabaseEnabled`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#setdatabaseenabled) [deprecated with WebSQL in Android version 15 (API level 35)](https://developer.android.com/about/versions/15/deprecations#websql-webview)
 - `WebSettings.setAppCacheEnabled` [deprecated and removed in Android 13 (API level 33)](https://developer.android.com/sdk/api_diff/33/changes/android.webkit.WebSettings#removed-methods-setAppCacheEnabled(boolean))
 
 Network cache is enabled by default and obeys the HTTP cache headers sent by the server. DOM storage is enabled by default on all supported WebView versions. Database related flags are deprecated and no longer control IndexedDB or other modern storage. Cookies are accepted by default unless an app disables them through `CookieManager`.
@@ -236,11 +236,11 @@ Android does not provide a dedicated API to delete the Chromium profile under `a
 
 A more adequate approach is to clear individual storage subsystems used by WebView. These include:
 
-- **Cached Resources**: [`WebView.clearCache`](https://developer.android.com/reference/android/webkit/WebView#clearCache(boolean))(true) clears the memory and disk HTTP cache. It does not remove cookies, DOM storage, IndexedDB, OPFS, or other persistent data.
-- **WebStorage APIs**: [`WebStorage.deleteAllData`](https://developer.android.com/reference/android/webkit/WebStorage#deleteAllData()) clears DOM storage and legacy WebSQL. It does not clear IndexedDB or OPFS.
-- **Cookies**: [`CookieManager.removeAllCookies`](https://developer.android.com/reference/android/webkit/CookieManager#removeAllCookies(android.webkit.ValueCallback%3Cjava.lang.Boolean%3E)) removes all cookies for the app.
+- **Cached Resources**: [`WebView.clearCache`](https://developer.android.com/reference/kotlin/android/webkit/WebView#clearcache)(true) clears the memory and disk HTTP cache. It does not remove cookies, DOM storage, IndexedDB, OPFS, or other persistent data.
+- **WebStorage APIs**: [`WebStorage.deleteAllData`](https://developer.android.com/reference/kotlin/android/webkit/WebStorage#deletealldata) clears DOM storage and legacy WebSQL. It does not clear IndexedDB or OPFS.
+- **Cookies**: [`CookieManager.removeAllCookies`](https://developer.android.com/reference/kotlin/android/webkit/CookieManager#removeallcookies) removes all cookies for the app.
 - **IndexedDB and OPFS**: IndexedDB and OPFS are managed internally by Chromium and are not covered by the WebStorage API. They cannot be deleted with Java file APIs such as [`java.io.File.deleteRecursively`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/java.io.-file/delete-recursively.html). Clearing requires deleting the entire WebView profile.
-- **SQLite Wasm**: SQLite Wasm databases live inside OPFS. They are not Android SQLite databases and cannot be controlled using Android APIs such as [`SQLiteDatabase.delete`](https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#delete(java.lang.String,%20java.lang.String,%20java.lang.String[])) or [`SQLiteDatabase.deleteDatabase`](https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#deleteDatabase(java.io.File)). Clearing requires deleting the entire WebView profile.
+- **SQLite Wasm**: SQLite Wasm databases live inside OPFS. They are not Android SQLite databases and cannot be controlled using Android APIs such as [`SQLiteDatabase.delete`](https://developer.android.com/reference/kotlin/android/database/sqlite/SQLiteDatabase#delete) or [`SQLiteDatabase.deleteDatabase`](https://developer.android.com/reference/kotlin/android/database/sqlite/SQLiteDatabase#deletedatabase). Clearing requires deleting the entire WebView profile.
 
 **Example:**
 

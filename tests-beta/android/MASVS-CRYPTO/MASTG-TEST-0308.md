@@ -14,13 +14,13 @@ This test is the dynamic counterpart to @MASTG-TEST-0307, but it focuses on inte
 
 Some of the relevant functions to intercept are:
 
-- [`Cipher.init(int opmode, Key key, AlgorithmParameters params)`](https://developer.android.com/reference/javax/crypto/Cipher#init(int,%20java.security.Key,%20java.security.AlgorithmParameters)) where `opmode` is one of:
+- [`Cipher.init(int opmode, Key key, AlgorithmParameters params)`](https://developer.android.com/reference/kotlin/javax/crypto/Cipher#init) where `opmode` is one of:
     - `Cipher.ENCRYPT_MODE`
     - `Cipher.DECRYPT_MODE`
     - `Cipher.WRAP_MODE`
     - `Cipher.UNWRAP_MODE`
-- [`Signature.initSign(PrivateKey privateKey)`](https://developer.android.com/reference/java/security/Signature#initSign(java.security.PrivateKey))
-- [`Signature.initVerify(PublicKey publicKey)`](https://developer.android.com/reference/java/security/Signature#initVerify(java.security.PublicKey))
+- [`Signature.initSign(PrivateKey privateKey)`](https://developer.android.com/reference/kotlin/java/security/Signature#initsign)
+- [`Signature.initVerify(PublicKey publicKey)`](https://developer.android.com/reference/kotlin/java/security/Signature#initverify)
 
 ## Steps
 

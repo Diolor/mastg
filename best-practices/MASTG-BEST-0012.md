@@ -6,7 +6,7 @@ platform: android
 knowledge: [MASTG-KNOW-0018]
 ---
 
-If JavaScript is **not required**, explicitly disable it in WebViews by setting [`setJavaScriptEnabled(false)`](https://developer.android.com/reference/android/webkit/WebSettings.html#setJavaScriptEnabled%28boolean%29).
+If JavaScript is **not required**, explicitly disable it in WebViews by setting [`setJavaScriptEnabled(false)`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#setjavascriptenabled).
 
 Enabling JavaScript in WebViews **increases the attack surface** and can expose your app to severe security risks, including:
 

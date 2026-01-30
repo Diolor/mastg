@@ -39,14 +39,14 @@ All unencrypted entries can be leveraged by an attacker.
 5. Stop the script by pressing `Ctrl+C` and/or `q` to quit the Frida CLI
 
 These are the relevant methods we are hooking to detect the use of `SharedPreferences` to write strings:
-    - [`SharedPreferences.Editor.putString(...)`](https://developer.android.com/reference/android/content/SharedPreferences.Editor#putString(java.lang.String,%20java.lang.String))
-    - [`SharedPreferences.Editor.putStringSet(...)`](https://developer.android.com/reference/android/content/SharedPreferences.Editor#putStringSet(java.lang.String,%20java.util.Set))
+    - [`SharedPreferences.Editor.putString(...)`](https://developer.android.com/reference/kotlin/android/content/SharedPreferences.Editor#putstring)
+    - [`SharedPreferences.Editor.putStringSet(...)`](https://developer.android.com/reference/kotlin/android/content/SharedPreferences.Editor#putstringset)
 
 Our hooks also trace calls to cryptographic methods to help determine whether the written values are encrypted or not; whether the Android KeyStore is used; and whether Base64 encoding is used to convert binary data to strings:
-    - [`javax.crypto.Cipher.*(...)`](https://developer.android.com/reference/javax/crypto/Cipher)
-    - [`java.security.KeyStore.*(...)`](https://developer.android.com/reference/java/security/KeyStore)
-    - [`javax.crypto.KeyGenerator.*(...)`](https://developer.android.com/reference/javax/crypto/KeyGenerator)
-    - [`android.util.Base64.*(...)`](https://developer.android.com/reference/android/util/Base64)
+    - [`javax.crypto.Cipher.*(...)`](https://developer.android.com/reference/kotlin/javax/crypto/Cipher)
+    - [`java.security.KeyStore.*(...)`](https://developer.android.com/reference/kotlin/java/security/KeyStore)
+    - [`javax.crypto.KeyGenerator.*(...)`](https://developer.android.com/reference/kotlin/javax/crypto/KeyGenerator)
+    - [`android.util.Base64.*(...)`](https://developer.android.com/reference/kotlin/android/util/Base64)
 
 {{ hooks.json # run.sh }}
 

@@ -12,7 +12,7 @@ To enhance user privacy and mitigate privacy risks, it is crucial for Android ap
 - [App permissions best practices](https://developer.android.com/training/permissions/usage-notes "App permissions best practices")
 - [Permissions and APIs that Access Sensitive Information](https://support.google.com/googleplay/android-developer/answer/9888170 "Permissions and APIs that Access Sensitive Information")
 
-Android permissions can be classified into distinct categories depending on the extent of restricted data access and permitted actions that they grant to an app. This classification includes the so-called ["Protection Level"](https://developer.android.com/guide/topics/manifest/permission-element#plevel "`<permission> - android:protectionLevel`") as shown on the [permissions API reference page](https://developer.android.com/reference/android/Manifest.permission "Manifest.permission") and [AndroidManifest.xml Source Definitions](https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/core/res/AndroidManifest.xml#819 "android.googlesource.com - AndroidManifest.xml").
+Android permissions can be classified into distinct categories depending on the extent of restricted data access and permitted actions that they grant to an app. This classification includes the so-called ["Protection Level"](https://developer.android.com/guide/topics/manifest/permission-element#plevel "`<permission> - android:protectionLevel`") as shown on the [permissions API reference page](https://developer.android.com/reference/kotlin/android/Manifest.permission "Manifest.permission") and [AndroidManifest.xml Source Definitions](https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/core/res/AndroidManifest.xml#819 "android.googlesource.com - AndroidManifest.xml").
 
 - [**Install-time permissions**](https://developer.android.com/guide/topics/permissions/overview#install-time "Install-time permissions"): grant limited access to restricted data or let the app perform restricted actions that minimally affect the system or other apps. They are granted automatically at installation time (Android 6.0 (API level 23) or higher).
     - Protection Level: `normal`. Grants apps access to isolated application-level features with minimal risk to other apps, the user, and the system. Example: `android.permission.INTERNET`
@@ -156,11 +156,11 @@ Note that this categorization can change over time. The paper gives us an exampl
 
 The [following changes](https://developer.android.com/about/versions/oreo/android-8.0-changes#atap "Android 8.0 (API level 26) - Changes for all apps") affect all apps running on Android 8.0 (API level 26), even to those apps targeting lower API levels.
 
-- **Contacts provider usage stats change**: when an app requests the [`READ_CONTACTS`](https://developer.android.com/reference/android/Manifest.permission.html#READ_CONTACTS "READ_CONTACTS") permission, queries for contact's usage data will return approximations rather than exact values (the auto-complete API is not affected by this change).
+- **Contacts provider usage stats change**: when an app requests the [`READ_CONTACTS`](https://developer.android.com/reference/kotlin/android/Manifest.permission#read_contacts "READ_CONTACTS") permission, queries for contact's usage data will return approximations rather than exact values (the auto-complete API is not affected by this change).
 
 Apps targeting Android 8.0 (API level 26) or higher [are affected](https://developer.android.com/about/versions/oreo/android-8.0-changes#o-apps "Apps targeting Android 8.0") by the following:
 
-- **Account access and discoverability improvements**: Apps can no longer get access to user accounts only by having the [`GET_ACCOUNTS`](https://developer.android.com/reference/android/Manifest.permission.html#GET_ACCOUNTS "GET_ACCOUNTS") permission granted, unless the authenticator owns the accounts or the user grants that access.
+- **Account access and discoverability improvements**: Apps can no longer get access to user accounts only by having the [`GET_ACCOUNTS`](https://developer.android.com/reference/kotlin/android/Manifest.permission#get_accounts "GET_ACCOUNTS") permission granted, unless the authenticator owns the accounts or the user grants that access.
 - **New telephony permissions**: the following permissions (classified as dangerous) are now part of the `PHONE` permissions group:
     - The `ANSWER_PHONE_CALLS` permission allows to answer incoming phone calls programmatically (via `acceptRingingCall`).
     - The `READ_PHONE_NUMBERS` permission grants read access to the phone numbers stored in the device.
@@ -176,14 +176,14 @@ The [following changes](https://developer.android.com/about/versions/pie/android
 
 - **Restricted access to call logs**: `READ_CALL_LOG`, `WRITE_CALL_LOG`, and `PROCESS_OUTGOING_CALLS` (dangerous) permissions are moved from `PHONE` to the new `CALL_LOG` permission group. This means that being able to make phone calls (e.g. by having the permissions of the `PHONE` group granted) is not sufficient to get access to the call logs.
 - **Restricted access to phone numbers**: apps wanting to read the phone number require the `READ_CALL_LOG` permission when running on Android 9 (API level 28).
-- **Restricted access to Wi-Fi location and connection information**: SSID and BSSID values cannot be retrieved (e.g. via [`WifiManager.getConnectionInfo`](https://developer.android.com/reference/android/net/wifi/WifiManager#getConnectionInfo%28%29 "WifiManager.getConnectionInfo") unless _all_ of the following is true:
+- **Restricted access to Wi-Fi location and connection information**: SSID and BSSID values cannot be retrieved (e.g. via [`WifiManager.getConnectionInfo`](https://developer.android.com/reference/kotlin/android/net/wifi/WifiManager#getconnectioninfo "WifiManager.getConnectionInfo") unless _all_ of the following is true:
     - The `ACCESS_FINE_LOCATION` or `ACCESS_COARSE_LOCATION` permission.
     - The `ACCESS_WIFI_STATE` permission.
     - Location services are enabled (under **Settings** -> **Location**).
 
 Apps targeting Android 9 (API level 28) or higher [are affected](https://developer.android.com/about/versions/pie/android-9.0-changes-28 "Behavior changes: apps targeting API level 28+") by the following:
 
-- **Build serial number deprecation**: device's hardware serial number cannot be read (e.g. via [`Build.getSerial`](https://developer.android.com/reference/android/os/Build.html#getSerial%28%29 "getSerial")) unless the `READ_PHONE_STATE` (dangerous) permission is granted.
+- **Build serial number deprecation**: device's hardware serial number cannot be read (e.g. via [`Build.getSerial`](https://developer.android.com/reference/kotlin/android/os/Build#getserial "getSerial")) unless the `READ_PHONE_STATE` (dangerous) permission is granted.
 
 **Android 10 (API level 29) Changes:**
 
@@ -229,9 +229,9 @@ This allows a common capability-style model where user interaction drives ad-hoc
 
 Here you can find more information about APIs related to URI Permissions:
 
-- [grantUriPermission](https://developer.android.com/reference/android/content/Context.html#grantUriPermission%28java.lang.String,%20android.net.Uri,%20int%29 "grantUriPermission")
-- [revokeUriPermission](https://developer.android.com/reference/android/content/Context#revokeUriPermission%28android.net.Uri,%20int%29 "revokeUriPermission")
-- [checkUriPermission](https://developer.android.com/reference/android/content/Context#checkUriPermission%28android.net.Uri,%20int,%20int,%20int%29 "checkUriPermission")
+- [grantUriPermission](https://developer.android.com/reference/kotlin/android/content/Context#granturipermission "grantUriPermission")
+- [revokeUriPermission](https://developer.android.com/reference/kotlin/android/content/Context#revokeuripermission "revokeUriPermission")
+- [checkUriPermission](https://developer.android.com/reference/kotlin/android/content/Context#checkuripermission "checkUriPermission")
 
 ## Custom Permissions
 
