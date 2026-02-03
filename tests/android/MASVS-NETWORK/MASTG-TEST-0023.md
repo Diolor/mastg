@@ -34,5 +34,5 @@ When you have the source code:
 
 When you do not have the source code:
 
-1. Use @MASTG-TOOL-0001 to hook [`java.security.Security.getProviders()`](https://developer.android.com/reference/java/security/Security#getProviders()) or use a script @MASTG-TOOL-0032 like [@platix/get-android-security-provider-mstg-network-6](https://codeshare.frida.re/@platix/get-android-security-provider-mstg-network-6/).
+1. Use @MASTG-TOOL-0001 to hook [`java.security.Security.getProviders()`](https://developer.android.com/reference/kotlin/java/security/Security#getproviders) or use a script @MASTG-TOOL-0032 like [@platix/get-android-security-provider-mstg-network-6](https://codeshare.frida.re/@platix/get-android-security-provider-mstg-network-6/).
 2. Determine whether the first provider is `GmsCore_OpenSSL`.

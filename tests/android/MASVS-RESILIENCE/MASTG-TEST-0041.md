@@ -17,7 +17,7 @@ deprecation_note: New version available in MASTG V2
 
 ## Static Analysis
 
-To determine whether [`StrictMode`](https://developer.android.com/reference/android/os/StrictMode) is enabled, you can look for the `StrictMode.setThreadPolicy` or `StrictMode.setVmPolicy` methods. Most likely, they will be in the `onCreate` method.
+To determine whether [`StrictMode`](https://developer.android.com/reference/kotlin/android/os/StrictMode) is enabled, you can look for the `StrictMode.setThreadPolicy` or `StrictMode.setVmPolicy` methods. Most likely, they will be in the `onCreate` method.
 
 The detection methods for the thread policy are:
 

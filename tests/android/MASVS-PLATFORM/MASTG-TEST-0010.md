@@ -19,7 +19,7 @@ deprecation_note: New version available in MASTG V2
 
 A screenshot of the current activity is taken when an Android app goes into background and displayed for aesthetic purposes when the app returns to the foreground. However, this may leak sensitive information.
 
-To determine whether the application may expose sensitive information via the app switcher, find out whether the [`FLAG_SECURE`](https://developer.android.com/reference/android/view/Display.html#FLAG_SECURE "FLAG_SECURE Option") option has been set. You should find something similar to the following code snippet:
+To determine whether the application may expose sensitive information via the app switcher, find out whether the [`FLAG_SECURE`](https://developer.android.com/reference/kotlin/android/view/Display#flag_secure "FLAG_SECURE Option") option has been set. You should find something similar to the following code snippet:
 
 Example in Java:
 

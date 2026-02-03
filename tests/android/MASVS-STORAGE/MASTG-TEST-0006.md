@@ -26,16 +26,16 @@ In the layout definition of an activity, you can define `TextViews` that have XM
         android:inputType="textNoSuggestions" />
 ```
 
-The code for all input fields that take sensitive information should include this XML attribute to [disable the keyboard suggestions](https://developer.android.com/reference/android/text/InputType.html#TYPE_TEXT_FLAG_NO_SUGGESTIONS "Disable keyboard suggestions").
+The code for all input fields that take sensitive information should include this XML attribute to [disable the keyboard suggestions](https://developer.android.com/reference/kotlin/android/text/InputType#type_text_flag_no_suggestions "Disable keyboard suggestions").
 
 Alternatively, the developer can use the following constants:
 
 | XML `android:inputType` | Code `InputType` | API level |
 | -- | --- | - |
-| [`textPassword`](https://developer.android.com/reference/android/widget/TextView#attr_android:inputType:~:text=_SUGGESTIONS.-,textPassword,-81) | [`TYPE_TEXT_VARIATION_PASSWORD`](https://developer.android.com/reference/android/text/InputType#TYPE_TEXT_VARIATION_PASSWORD "Text password input type") | 3 |
-| [`textVisiblePassword`](https://developer.android.com/reference/android/widget/TextView#attr_android:inputType:~:text=_URI.-,textVisiblePassword,-91) | [`TYPE_TEXT_VARIATION_VISIBLE_PASSWORD`](https://developer.android.com/reference/android/text/InputType#TYPE_TEXT_VARIATION_VISIBLE_PASSWORD "Text visible password input type") | 3 |
-| [`numberPassword`](https://developer.android.com/reference/android/widget/TextView#attr_android:inputType:~:text=_DECIMAL.-,numberPassword,-12) | [`TYPE_NUMBER_VARIATION_PASSWORD`](https://developer.android.com/reference/android/text/InputType#TYPE_NUMBER_VARIATION_PASSWORD "A numeric password field") | 11 |
-| [`textWebPassword`](https://developer.android.com/reference/android/widget/TextView#attr_android:inputType:~:text=_ADDRESS.-,textWebPassword,-e1) | [`TYPE_TEXT_VARIATION_WEB_PASSWORD`](https://developer.android.com/reference/android/text/InputType#TYPE_TEXT_VARIATION_WEB_PASSWORD "Text web password input type") | 11 |
+| [`textPassword`](https://developer.android.com/reference/kotlin/android/widget/TextView#android:inputType:~:text=textPassword) | [`TYPE_TEXT_VARIATION_PASSWORD`](https://developer.android.com/reference/kotlin/android/text/InputType#type_text_variation_password "Text password input type") | 3 |
+| [`textVisiblePassword`](https://developer.android.com/reference/kotlin/android/widget/TextView#android:inputType:~:text=textVisiblePassword) | [`TYPE_TEXT_VARIATION_VISIBLE_PASSWORD`](https://developer.android.com/reference/kotlin/android/text/InputType#type_text_variation_visible_password "Text visible password input type") | 3 |
+| [`numberPassword`](https://developer.android.com/reference/kotlin/android/widget/TextView#android:inputType:~:text=numberPassword) | [`TYPE_NUMBER_VARIATION_PASSWORD`](https://developer.android.com/reference/kotlin/android/text/InputType#type_number_variation_password "A numeric password field") | 11 |
+| [`textWebPassword`](https://developer.android.com/reference/kotlin/android/widget/TextView#android:inputType:~:text=textWebPassword) | [`TYPE_TEXT_VARIATION_WEB_PASSWORD`](https://developer.android.com/reference/kotlin/android/text/InputType#type_text_variation_web_password "Text web password input type") | 11 |
 
 Check the application code to verify that none of the input types are being overwritten. For example, by doing `findViewById(R.id.KeyBoardCache).setInputType(InputType.TYPE_CLASS_TEXT)` the input type of the input field `KeyBoardCache` is set to `text` reenabling the keyboard cache.
 

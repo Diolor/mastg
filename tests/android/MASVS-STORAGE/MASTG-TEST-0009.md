@@ -52,8 +52,8 @@ android:backupAgent
 
 To implement key/value backup, extend one of the following classes:
 
-- [BackupAgent](https://developer.android.com/reference/android/app/backup/BackupAgent.html "BackupAgent")
-- [BackupAgentHelper](https://developer.android.com/reference/android/app/backup/BackupAgentHelper.html "BackupAgentHelper")
+- [BackupAgent](https://developer.android.com/reference/kotlin/android/app/backup/BackupAgent "BackupAgent")
+- [BackupAgentHelper](https://developer.android.com/reference/kotlin/android/app/backup/BackupAgentHelper "BackupAgentHelper")
 
 To check for key/value backup implementations, look for these classes in the source code.
 

@@ -99,7 +99,7 @@ for(ResolveInfo info : getPackageManager().queryIntentActivities(intent, 0)) {
 
 An improperly handled return value of an implicit intent can lead to arbitrary code execution if the victim app allows `content://` and `file://` URLs.
 
-An attacker can implement a [`ContentProvider`](https://developer.android.com/reference/android/content/ContentProvider "Android ContentProvider") that contains `public Cursor query(...)` to set an arbitrary file (in this case _lib.so_), and if the victim loads this file from the content provider by executing `copy` the attacker's `ParcelFileDescriptor openFile(...)` method will be executed and return a malicious _fakelib.so_.
+An attacker can implement a [`ContentProvider`](https://developer.android.com/reference/kotlin/android/content/ContentProvider "Android ContentProvider") that contains `public Cursor query(...)` to set an arbitrary file (in this case _lib.so_), and if the victim loads this file from the content provider by executing `copy` the attacker's `ParcelFileDescriptor openFile(...)` method will be executed and return a malicious _fakelib.so_.
 
 AndroidManifest.xml
 

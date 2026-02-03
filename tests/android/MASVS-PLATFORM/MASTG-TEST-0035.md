@@ -14,15 +14,15 @@ profiles: [L2]
 
 To test for [overlay attacks](../../../Document/0x05h-Testing-Platform-Interaction.md#overlay-attacks "Overlay Attacks") you need to check the app for usage of certain APIs and attributed typically used to protect against overlay attacks as well as check the Android version that app is targeting.
 
-To mitigate these attacks please carefully read the general guidelines about Android View security in the [Android Developer Documentation](https://developer.android.com/reference/android/view/View#security "View Security"). For instance, the so-called _touch filtering_ is a common defense against tapjacking, which contributes to safeguarding users against these vulnerabilities, usually in combination with other techniques and considerations as we introduce in this section.
+To mitigate these attacks please carefully read the general guidelines about Android View security in the [Android Developer Documentation](https://developer.android.com/reference/kotlin/android/view/View#security "View Security"). For instance, the so-called _touch filtering_ is a common defense against tapjacking, which contributes to safeguarding users against these vulnerabilities, usually in combination with other techniques and considerations as we introduce in this section.
 
 ## Static Analysis
 
 To start your static analysis you can check the app for the following methods and attributes (non-exhaustive list):
 
-- Override [`onFilterTouchEventForSecurity`](https://developer.android.com/reference/android/view/View#onFilterTouchEventForSecurity%28android.view.MotionEvent%29 "onFilterTouchEventForSecurity") for more fine-grained control and to implement a custom security policy for views.
-- Set the layout attribute [`android:filterTouchesWhenObscured`](https://developer.android.com/reference/android/view/View#attr_android:filterTouchesWhenObscured "android:filterTouchesWhenObscured") to true or call [`setFilterTouchesWhenObscured`](https://developer.android.com/reference/android/view/View.html#setFilterTouchesWhenObscured%28boolean%29 "setFilterTouchesWhenObscured").
-- Check [FLAG_WINDOW_IS_OBSCURED](https://developer.android.com/reference/android/view/MotionEvent.html#FLAG_WINDOW_IS_OBSCURED "FLAG_WINDOW_IS_OBSCURED") (since API level 9) or [FLAG_WINDOW_IS_PARTIALLY_OBSCURED](https://developer.android.com/reference/android/view/MotionEvent.html#FLAG_WINDOW_IS_PARTIALLY_OBSCURED "FLAG_WINDOW_IS_PARTIALLY_OBSCURED") (starting on API level 29).
+- Override [`onFilterTouchEventForSecurity`](https://developer.android.com/reference/kotlin/android/view/View#onfiltertoucheventforsecurity "onFilterTouchEventForSecurity") for more fine-grained control and to implement a custom security policy for views.
+- Set the layout attribute [`android:filterTouchesWhenObscured`](https://developer.android.com/reference/kotlin/android/view/View#android:filtertoucheswhenobscured "android:filterTouchesWhenObscured") to true or call [`setFilterTouchesWhenObscured`](https://developer.android.com/reference/kotlin/android/view/View#setfiltertoucheswhenobscured "setFilterTouchesWhenObscured").
+- Check [FLAG_WINDOW_IS_OBSCURED](https://developer.android.com/reference/kotlin/android/view/MotionEvent#flag_window_is_obscured "FLAG_WINDOW_IS_OBSCURED") (since API level 9) or [FLAG_WINDOW_IS_PARTIALLY_OBSCURED](https://developer.android.com/reference/kotlin/android/view/MotionEvent#flag_window_is_partially_obscured "FLAG_WINDOW_IS_PARTIALLY_OBSCURED") (starting on API level 29).
 
 Some attributes might affect the app as a whole, while others can be applied to specific components. The latter would be the case when, for example, there is a business need to specifically allow overlays while wanting to protect sensitive input UI elements. The developers might also take additional precautions to confirm the user's actual intent which might be legitimate and tell it apart from a potential attack.
 
