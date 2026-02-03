@@ -8,8 +8,8 @@ During implementation of a mobile application, developers may apply traditional 
 
 The following is a list of Android IPC Mechanisms that may expose sensitive data:
 
-- [Binder](https://developer.android.com/reference/android/os/Binder.html "Binder")
+- [Binder](https://developer.android.com/reference/kotlin/android/os/Binder "Binder")
 - [AIDL](https://developer.android.com/guide/components/aidl.html "AIDL")
-- [Intents](https://developer.android.com/reference/android/content/Intent.html "Intent")
-- [Content Providers](https://developer.android.com/reference/android/content/ContentProvider.html "ContentProvider")
+- [Intents](https://developer.android.com/reference/kotlin/android/content/Intent "Intent")
+- [Content Providers](https://developer.android.com/reference/kotlin/android/content/ContentProvider "ContentProvider")
 - [Services](https://developer.android.com/guide/components/services.html "Services")

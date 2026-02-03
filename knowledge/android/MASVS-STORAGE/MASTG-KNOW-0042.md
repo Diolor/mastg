@@ -23,7 +23,7 @@ The Android developers documentation provides a detailed guide highlighting comm
 > [App attribution for media files (Android Developers)](https://developer.android.com/training/data-storage/shared/media#app-attribution):
 > When [scoped storage](https://developer.android.com/training/data-storage#scoped-storage) is enabled for an app that targets Android 10 or higher, the system attributes an app to each media file, which determines the files that your app can access when it hasn't requested any storage permissions. Each file can be attributed to only one app. Therefore, if your app creates a media file that's stored in the photos, videos, or audio files media collection, your app has access to the file.
 >
-> If the user uninstalls and reinstalls your app, however, you must request [READ_EXTERNAL_STORAGE](https://developer.android.com/reference/android/Manifest.permission#READ_EXTERNAL_STORAGE) to access the files that your app originally created. This permission request is required because the system considers the file to be attributed to the previously installed version of the app, rather than the newly installed one.
+> If the user uninstalls and reinstalls your app, however, you must request [READ_EXTERNAL_STORAGE](https://developer.android.com/reference/kotlin/android/Manifest.permission#read_external_storage) to access the files that your app originally created. This permission request is required because the system considers the file to be attributed to the previously installed version of the app, rather than the newly installed one.
 
 For example, trying to access a file stored using the `MediaStore` API with a `content://` URI like `content://media/external_primary` would only work as long as the image _belongs_ to the invoking app (due to `owner_package_name` attribute in the `MediaStore`). If the app calls a `content://` URI that does not belong to the app, it will fail with a `SecurityException`:
 
@@ -59,7 +59,7 @@ adb shell pm revoke org.owasp.mastestapp android.permission.READ_MEDIA_IMAGES
 
 ## External Storage APIs
 
-There are APIs such as [`getExternalStoragePublicDirectory`](https://developer.android.com/reference/kotlin/android/os/Environment#getExternalStoragePublicDirectory(kotlin.String)) that return paths to a shared location that other apps can access. An app may obtain a path to an "external" location and write sensitive data to it. This location is considered "Shared Storage Requiring No User Interaction", which means that a third-party app with proper permissions can read this sensitive data.
+There are APIs such as [`getExternalStoragePublicDirectory`](https://developer.android.com/reference/kotlin/android/os/Environment#getexternalstoragepublicdirectory) that return paths to a shared location that other apps can access. An app may obtain a path to an "external" location and write sensitive data to it. This location is considered "Shared Storage Requiring No User Interaction", which means that a third-party app with proper permissions can read this sensitive data.
 
 For example, the following Kotlin snippet stores sensitive information in clear text to a file `password.txt` residing on external storage.
 
@@ -98,11 +98,11 @@ Using this API requires a `ContentResolver` object retrieved from the app's Cont
 
 ## Manifest Permissions
 
-Android defines the following [permissions for accessing external storage](https://developer.android.com/training/data-storage#permissions): [`READ_EXTERNAL_STORAGE`](https://developer.android.com/reference/android/Manifest.permission#READ_EXTERNAL_STORAGE), [`WRITE_EXTERNAL_STORAGE`](https://developer.android.com/reference/android/Manifest.permission#WRITE_EXTERNAL_STORAGE) and [`MANAGE_EXTERNAL_STORAGE`](https://developer.android.com/reference/android/Manifest.permission#MANAGE_EXTERNAL_STORAGE).
+Android defines the following [permissions for accessing external storage](https://developer.android.com/training/data-storage#permissions): [`READ_EXTERNAL_STORAGE`](https://developer.android.com/reference/kotlin/android/Manifest.permission#read_external_storage), [`WRITE_EXTERNAL_STORAGE`](https://developer.android.com/reference/kotlin/android/Manifest.permission#write_external_storage) and [`MANAGE_EXTERNAL_STORAGE`](https://developer.android.com/reference/kotlin/android/Manifest.permission#manage_external_storage).
 
 An app must declare in the Android Manifest file an intention to write to shared locations. Below you can find a list of such manifest permissions:
 
-- [`READ_EXTERNAL_STORAGE`](https://developer.android.com/reference/android/Manifest.permission#READ_EXTERNAL_STORAGE): allows an app to read from external storage.
+- [`READ_EXTERNAL_STORAGE`](https://developer.android.com/reference/kotlin/android/Manifest.permission#read_external_storage): allows an app to read from external storage.
     - **Before Android 4.4 (API level 19)**, this permission is not enforced and all apps have access to read the entire external storage (including files from other apps).
     - **Starting on Android 4.4 (API level 19)**, apps don't need to request this permission to access their own app-specific directories within external storage.
     - **Starting on Android 10 (API level 29)**, [scoped storage](https://developer.android.com/training/data-storage#scoped-storage) applies by default:
@@ -110,17 +110,17 @@ An app must declare in the Android Manifest file an intention to write to shared
         - Apps don't need to have this permission to read files from their own app-specific directories within external storage (scoped storage), or their own files in the MediaStore.
     - **Starting on Android 13 (API level 33)**, this permission **has no effect**. If needing to access media files from other apps, apps must request one or more of these permissions: `READ_MEDIA_IMAGES`, `READ_MEDIA_VIDEO`, or `READ_MEDIA_AUDIO`.
 
-- [`WRITE_EXTERNAL_STORAGE`](https://developer.android.com/reference/android/Manifest.permission#WRITE_EXTERNAL_STORAGE): allows an app to write a file to the "external storage", regardless of the actual storage origin (external disk or internally emulated by the system).
+- [`WRITE_EXTERNAL_STORAGE`](https://developer.android.com/reference/kotlin/android/Manifest.permission#write_external_storage): allows an app to write a file to the "external storage", regardless of the actual storage origin (external disk or internally emulated by the system).
     - **Starting on Android 4.4 (API level 19)**, apps don't need to request this permission to access their own app-specific directories within external storage.
     - **Starting on Android 10 (API level 29)**, [scoped storage](https://developer.android.com/training/data-storage#scoped-storage) applies by default:
         - Apps **cannot write to the app-specific directories that belong to other apps** (which was possible before when having `WRITE_EXTERNAL_STORAGE` granted).
         - Apps don't need this permission to write files in their own app-specific directories within external storage.
-    - **Starting on Android 11 (API level 30)**, this permission is **deprecated and has no effect**, but can be preserved with [requestLegacyExternalStorage](https://developer.android.com/reference/android/R.attr#requestLegacyExternalStorage) and [preserveLegacyExternalStorage](https://developer.android.com/reference/android/R.attr#preserveLegacyExternalStorage).
+    - **Starting on Android 11 (API level 30)**, this permission is **deprecated and has no effect**, but can be preserved with [requestLegacyExternalStorage](https://developer.android.com/reference/kotlin/android/R.attr#requestlegacyexternalstorage) and [preserveLegacyExternalStorage](https://developer.android.com/reference/kotlin/android/R.attr#preservelegacyexternalstorage).
 
-- [`MANAGE_EXTERNAL_STORAGE`](https://developer.android.com/reference/android/Manifest.permission#MANAGE_EXTERNAL_STORAGE): Some apps require [broad access to all files](https://developer.android.com/training/data-storage/manage-all-files).
+- [`MANAGE_EXTERNAL_STORAGE`](https://developer.android.com/reference/kotlin/android/Manifest.permission#manage_external_storage): Some apps require [broad access to all files](https://developer.android.com/training/data-storage/manage-all-files).
     - This permission only applies to apps targeting Android 11.0 (API level 30) or higher.
     - Usage of this permission is **restricted by Google Play** unless the app satisfies [certain requirements](https://support.google.com/googleplay/android-developer/answer/10467955) and requires **special app access** called ["All files access"](https://developer.android.com/preview/privacy/storage#all-files-access).
     - Scoped storage doesn't affect the app's ability to access app-specific directories when having this permission.
 
-- [`READ_MEDIA_IMAGES`](https://developer.android.com/reference/android/Manifest.permission#READ_MEDIA_IMAGES), [`READ_MEDIA_VIDEO`](https://developer.android.com/reference/android/Manifest.permission#READ_MEDIA_VIDEO) and [`READ_MEDIA_AUDIO`](https://developer.android.com/reference/android/Manifest.permission#READ_MEDIA_AUDIO): allow an app to read media files from the `MediaStore` collection.
+- [`READ_MEDIA_IMAGES`](https://developer.android.com/reference/kotlin/android/Manifest.permission#read_media_images), [`READ_MEDIA_VIDEO`](https://developer.android.com/reference/kotlin/android/Manifest.permission#read_media_video) and [`READ_MEDIA_AUDIO`](https://developer.android.com/reference/kotlin/android/Manifest.permission#read_media_audio): allow an app to read media files from the `MediaStore` collection.
     - **Starting on Android 13 (API level 33)**, since `READ_EXTERNAL_STORAGE` **has no effect**, these permissions are required to access media files from the `MediaStore.Images`, `MediaStore.Video`, and `MediaStore.Audio` collections respectively.

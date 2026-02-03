@@ -100,9 +100,9 @@ Results in `1 or 128 = 129`, which is the value you will see in the decompiled c
 
 To decode the `inputType` value, you can use the following masks:
 
-- [`TYPE_MASK_CLASS`](https://developer.android.com/reference/android/text/InputType#TYPE_MASK_CLASS) = `0x0000000F` (to extract the class part)
-- [`TYPE_MASK_VARIATION`](https://developer.android.com/reference/android/text/InputType#TYPE_MASK_VARIATION) = `0x00000FF0` (to extract the variation part)
-- [`TYPE_MASK_FLAGS`](https://developer.android.com/reference/android/text/InputType#TYPE_MASK_FLAGS) = `0x00FFF000` (to extract the flags part)
+- [`TYPE_MASK_CLASS`](https://developer.android.com/reference/kotlin/android/text/InputType#type_mask_class) = `0x0000000F` (to extract the class part)
+- [`TYPE_MASK_VARIATION`](https://developer.android.com/reference/kotlin/android/text/InputType#type_mask_variation) = `0x00000FF0` (to extract the variation part)
+- [`TYPE_MASK_FLAGS`](https://developer.android.com/reference/kotlin/android/text/InputType#type_mask_flags) = `0x00FFF000` (to extract the flags part)
 
 You can quickly decode `inputType` values using the masks and the bitwise AND operation e.g. in Python:
 

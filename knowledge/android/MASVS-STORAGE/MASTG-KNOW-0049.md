@@ -9,4 +9,4 @@ There are many legitimate reasons to create log files on a mobile device, such a
 You can create log files in several ways. The following list includes two classes that are available for Android:
 
 - [Log Class](https://developer.android.com/reference/kotlin/android/util/Log "Log Class")
-- [Logger Class](https://developer.android.com/reference/java/util/logging/Logger.html "Logger Class")
+- [Logger Class](https://developer.android.com/reference/kotlin/java/util/logging/Logger "Logger Class")
