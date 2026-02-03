@@ -12,15 +12,15 @@ knowledge: [MASTG-KNOW-0012]
 
 According to section "5.2 Key Usage" of [NIST SP 800-57 part 1 revision 5](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf), cryptographic keys should be assigned a specific purpose and used only for that purpose (e.g., encryption, integrity authentication, key wrapping, random bit generation, or digital signatures). For example, a key intended for encryption should not be used for signing.
 
-On Android, asymmetric keys are commonly generated with [`java.security.KeyPairGenerator`](https://developer.android.com/reference/java/security/KeyPairGenerator) configured through [`android.security.keystore.KeyGenParameterSpec`](https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec).
+On Android, asymmetric keys are commonly generated with [`java.security.KeyPairGenerator`](https://developer.android.com/reference/kotlin/java/security/KeyPairGenerator) configured through [`android.security.keystore.KeyGenParameterSpec`](https://developer.android.com/reference/kotlin/android/security/keystore/KeyGenParameterSpec).
 
-The [`KeyGenParameterSpec.Builder`](https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec.Builder) constructor has two arguments: the `keystoreAlias` and `purposes`, a bitmask of allowed operations documented in [`android.security.keystore.KeyProperties`](https://developer.android.com/reference/android/security/keystore/KeyProperties).
+The [`KeyGenParameterSpec.Builder`](https://developer.android.com/reference/kotlin/android/security/keystore/KeyGenParameterSpec.Builder) constructor has two arguments: the `keystoreAlias` and `purposes`, a bitmask of allowed operations documented in [`android.security.keystore.KeyProperties`](https://developer.android.com/reference/kotlin/android/security/keystore/KeyProperties).
 
-- [`KeyProperties.PURPOSE_SIGN`](https://developer.android.com/reference/android/security/keystore/KeyProperties#PURPOSE_SIGN)
-- [`KeyProperties.PURPOSE_VERIFY`](https://developer.android.com/reference/android/security/keystore/KeyProperties#PURPOSE_VERIFY)
-- [`KeyProperties.PURPOSE_ENCRYPT`](https://developer.android.com/reference/android/security/keystore/KeyProperties#PURPOSE_ENCRYPT)
-- [`KeyProperties.PURPOSE_DECRYPT`](https://developer.android.com/reference/android/security/keystore/KeyProperties#PURPOSE_DECRYPT)
-- [`KeyProperties.PURPOSE_WRAP_KEY`](https://developer.android.com/reference/android/security/keystore/KeyProperties#PURPOSE_WRAP_KEY)
+- [`KeyProperties.PURPOSE_SIGN`](https://developer.android.com/reference/kotlin/android/security/keystore/KeyProperties#purpose_sign)
+- [`KeyProperties.PURPOSE_VERIFY`](https://developer.android.com/reference/kotlin/android/security/keystore/KeyProperties#purpose_verify)
+- [`KeyProperties.PURPOSE_ENCRYPT`](https://developer.android.com/reference/kotlin/android/security/keystore/KeyProperties#purpose_encrypt)
+- [`KeyProperties.PURPOSE_DECRYPT`](https://developer.android.com/reference/kotlin/android/security/keystore/KeyProperties#purpose_decrypt)
+- [`KeyProperties.PURPOSE_WRAP_KEY`](https://developer.android.com/reference/kotlin/android/security/keystore/KeyProperties#purpose_wrap_key)
 
 ## Steps
 

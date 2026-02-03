@@ -13,7 +13,7 @@ knowledge: [MASTG-KNOW-0018]
 
 ## Overview
 
-This test checks for references to methods from the [`WebSettings`](https://developer.android.com/reference/android/webkit/WebSettings.html) class used by Android WebViews which [enable loading content from various sources, including local files](../../../Document/0x05h-Testing-Platform-Interaction.md/#webview-local-file-access-settings). If improperly configured, these methods can introduce security risks such as unauthorized file access and data exfiltration. These methods are:
+This test checks for references to methods from the [`WebSettings`](https://developer.android.com/reference/kotlin/android/webkit/WebSettings) class used by Android WebViews which [enable loading content from various sources, including local files](../../../Document/0x05h-Testing-Platform-Interaction.md/#webview-local-file-access-settings). If improperly configured, these methods can introduce security risks such as unauthorized file access and data exfiltration. These methods are:
 
 - `setAllowFileAccess`: allows the WebView to load local files from the app's internal storage or external storage.
 - `setAllowFileAccessFromFileURLs`: lets JavaScript within those local files access other local files.
@@ -49,7 +49,7 @@ And the server would not receive the file content:
 Error reading file: 0
 ```
 
-**Note 2**: As indicated in the Android docs, the value of [**`setAllowFileAccessFromFileURLs` is ignored**](https://developer.android.com/reference/android/webkit/WebSettings#setAllowFileAccessFromFileURLs(boolean)) if `allowUniversalAccessFromFileURLs=true`.
+**Note 2**: As indicated in the Android docs, the value of [**`setAllowFileAccessFromFileURLs` is ignored**](https://developer.android.com/reference/kotlin/android/webkit/WebSettings#setallowfileaccessfromfileurls) if `allowUniversalAccessFromFileURLs=true`.
 
 ## Steps
 
