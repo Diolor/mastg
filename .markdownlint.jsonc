@@ -59,6 +59,13 @@
           "searchPattern": "/([^\\s>])  ([^\\s|])/g",
           "replace": "$1 $2",
           "searchScope": "text"
+        },
+        {
+          "name": "android-kotlin-reference-links",
+          "message": "MAS-LINT-007/Android API links must use the Kotlin variant",
+          "searchPattern": "/https:\\/\\/developer\\.android\\.com\\/reference\\/(?!kotlin[\\/)])/g",
+          "replace": "",
+          "searchScope": "all"
         }
         // {
         //   "name": "correct-noun-forms",
