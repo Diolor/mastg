@@ -41,5 +41,3 @@ references.json
 package.json
 package-lock.json
 .gradle/
-package.json
-package-lock.json
