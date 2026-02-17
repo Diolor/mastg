@@ -40,3 +40,6 @@ references.json
 .obsidian/
 package.json
 package-lock.json
+.gradle/
+package.json
+package-lock.json
